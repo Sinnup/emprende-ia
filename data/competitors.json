@@ -1,0 +1,160 @@
+{
+  "722110": {
+    "Cuauhtémoc": [
+      {"name": "Casa Lucio", "lat": 19.4326, "lon": -99.1332, "rating": 4.5, "reviews": 2340},
+      {"name": "Contramar", "lat": 19.4350, "lon": -99.1298, "rating": 4.7, "reviews": 5600},
+      {"name": "Restaurante Balcón", "lat": 19.4335, "lon": -99.1355, "rating": 4.1, "reviews": 890},
+      {"name": "Casa de Comidas", "lat": 19.4310, "lon": -99.1290, "rating": 3.9, "reviews": 650},
+      {"name": "El Fogón", "lat": 19.4340, "lon": -99.1310, "rating": 4.3, "reviews": 1200},
+      {"name": "Salsa y Sabor", "lat": 19.4320, "lon": -99.1340, "rating": 3.8, "reviews": 480}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Pujol", "lat": 19.4430, "lon": -99.1580, "rating": 4.8, "reviews": 8900},
+      {"name": "Quintonil", "lat": 19.4410, "lon": -99.1600, "rating": 4.7, "reviews": 4200},
+      {"name": "Izote", "lat": 19.4450, "lon": -99.1550, "rating": 4.4, "reviews": 2100},
+      {"name": "Comedor Público", "lat": 19.4420, "lon": -99.1620, "rating": 4.0, "reviews": 1050},
+      {"name": "Casa Oaxaca", "lat": 19.4440, "lon": -99.1570, "rating": 4.2, "reviews": 1800}
+    ],
+    "Benito Juárez": [
+      {"name": "Punto México", "lat": 19.4200, "lon": -99.1650, "rating": 4.3, "reviews": 1950},
+      {"name": "Condimento", "lat": 19.4220, "lon": -99.1680, "rating": 4.1, "reviews": 1200},
+      {"name": "Casa Mendes", "lat": 19.4180, "lon": -99.1620, "rating": 3.9, "reviews": 780},
+      {"name": "Los Tíos", "lat": 19.4210, "lon": -99.1700, "rating": 4.4, "reviews": 2200}
+    ],
+    "Coyoacán": [
+      {"name": "Café de Chungará", "lat": 19.3850, "lon": -99.1620, "rating": 4.2, "reviews": 1650},
+      {"name": "La Malinche", "lat": 19.3870, "lon": -99.1650, "rating": 4.0, "reviews": 950},
+      {"name": "Casa Frida", "lat": 19.3880, "lon": -99.1600, "rating": 4.5, "reviews": 2800},
+      {"name": "Comida del Pueblo", "lat": 19.3860, "lon": -99.1680, "rating": 3.8, "reviews": 620}
+    ],
+    "Iztapalapa": [
+      {"name": "Casa Maya", "lat": 19.3600, "lon": -99.0900, "rating": 3.9, "reviews": 580},
+      {"name": "El Comal", "lat": 19.3620, "lon": -99.0880, "rating": 4.1, "reviews": 890},
+      {"name": "Taquería Jalapeño", "lat": 19.3580, "lon": -99.0920, "rating": 4.0, "reviews": 1200}
+    ]
+  },
+  "461110": {
+    "Cuauhtémoc": [
+      {"name": "Abarrotes Central", "lat": 19.4326, "lon": -99.1332, "rating": 4.2, "reviews": 450},
+      {"name": "Tienda López", "lat": 19.4350, "lon": -99.1298, "rating": 3.8, "reviews": 320},
+      {"name": "Despensa Maya", "lat": 19.4335, "lon": -99.1355, "rating": 4.0, "reviews": 280},
+      {"name": "Superette González", "lat": 19.4310, "lon": -99.1290, "rating": 3.9, "reviews": 350},
+      {"name": "Bodega Don Pedro", "lat": 19.4340, "lon": -99.1310, "rating": 4.1, "reviews": 520}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Tienda Reforma", "lat": 19.4430, "lon": -99.1580, "rating": 4.3, "reviews": 620},
+      {"name": "Abarrotes Premium", "lat": 19.4410, "lon": -99.1600, "rating": 4.0, "reviews": 480},
+      {"name": "Despensa del Barrio", "lat": 19.4450, "lon": -99.1550, "rating": 4.2, "reviews": 590}
+    ],
+    "Benito Juárez": [
+      {"name": "Super Rosa", "lat": 19.4200, "lon": -99.1650, "rating": 4.1, "reviews": 510},
+      {"name": "Tiendita Fernández", "lat": 19.4220, "lon": -99.1680, "rating": 3.9, "reviews": 380},
+      {"name": "Abarrotes Familia", "lat": 19.4180, "lon": -99.1620, "rating": 4.0, "reviews": 420}
+    ],
+    "Iztapalapa": [
+      {"name": "Tienda del Pueblo", "lat": 19.3600, "lon": -99.0900, "rating": 3.8, "reviews": 290},
+      {"name": "Abarrotes Económicos", "lat": 19.3620, "lon": -99.0880, "rating": 4.0, "reviews": 410},
+      {"name": "Despensa Local", "lat": 19.3580, "lon": -99.0920, "rating": 3.9, "reviews": 350}
+    ],
+    "Coyoacán": [
+      {"name": "Tienda Coyoacán", "lat": 19.3850, "lon": -99.1620, "rating": 4.2, "reviews": 480},
+      {"name": "Abarrotes del Centro", "lat": 19.3870, "lon": -99.1650, "rating": 4.0, "reviews": 380}
+    ]
+  },
+  "551020": {
+    "Cuauhtémoc": [
+      {"name": "Despacho Jurídico García", "lat": 19.4326, "lon": -99.1332, "rating": 4.6, "reviews": 180},
+      {"name": "Consultoría Empresarial", "lat": 19.4350, "lon": -99.1298, "rating": 4.4, "reviews": 150},
+      {"name": "Oficina Contable López", "lat": 19.4335, "lon": -99.1355, "rating": 4.3, "reviews": 120},
+      {"name": "Asesoría Fiscal Centro", "lat": 19.4310, "lon": -99.1290, "rating": 4.5, "reviews": 200}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Despacho Premium", "lat": 19.4430, "lon": -99.1580, "rating": 4.7, "reviews": 280},
+      {"name": "Consultoría Global", "lat": 19.4410, "lon": -99.1600, "rating": 4.5, "reviews": 220},
+      {"name": "Asesoría Profesional", "lat": 19.4450, "lon": -99.1550, "rating": 4.4, "reviews": 190}
+    ],
+    "Benito Juárez": [
+      {"name": "Despacho Ejecutivo", "lat": 19.4200, "lon": -99.1650, "rating": 4.4, "reviews": 160},
+      {"name": "Consultoría Empresas", "lat": 19.4220, "lon": -99.1680, "rating": 4.3, "reviews": 140}
+    ]
+  },
+  "813000": {
+    "Cuauhtémoc": [
+      {"name": "Servicios de Limpieza Central", "lat": 19.4326, "lon": -99.1332, "rating": 4.1, "reviews": 95},
+      {"name": "Mantenimiento Profesional", "lat": 19.4350, "lon": -99.1298, "rating": 3.9, "reviews": 70},
+      {"name": "Servicios Integrales", "lat": 19.4335, "lon": -99.1355, "rating": 4.2, "reviews": 110}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Limpieza Premium", "lat": 19.4430, "lon": -99.1580, "rating": 4.3, "reviews": 130},
+      {"name": "Mantenimiento Ejecutivo", "lat": 19.4410, "lon": -99.1600, "rating": 4.2, "reviews": 105}
+    ],
+    "Iztapalapa": [
+      {"name": "Servicios Populares", "lat": 19.3600, "lon": -99.0900, "rating": 3.8, "reviews": 60},
+      {"name": "Limpieza Económica", "lat": 19.3620, "lon": -99.0880, "rating": 3.9, "reviews": 75}
+    ]
+  },
+  "811000": {
+    "Cuauhtémoc": [
+      {"name": "Reparaciones Varias Centro", "lat": 19.4326, "lon": -99.1332, "rating": 4.0, "reviews": 85},
+      {"name": "Taller de Reparaciones", "lat": 19.4350, "lon": -99.1298, "rating": 4.1, "reviews": 110},
+      {"name": "Servicios Técnicos", "lat": 19.4335, "lon": -99.1355, "rating": 3.9, "reviews": 70}
+    ],
+    "Iztapalapa": [
+      {"name": "Taller del Pueblo", "lat": 19.3600, "lon": -99.0900, "rating": 3.8, "reviews": 55},
+      {"name": "Reparaciones Económicas", "lat": 19.3620, "lon": -99.0880, "rating": 3.9, "reviews": 65}
+    ]
+  },
+  "621100": {
+    "Cuauhtémoc": [
+      {"name": "Clínica Centro", "lat": 19.4326, "lon": -99.1332, "rating": 4.4, "reviews": 320},
+      {"name": "Consultorio Médico", "lat": 19.4350, "lon": -99.1298, "rating": 4.3, "reviews": 280},
+      {"name": "Centro de Salud", "lat": 19.4335, "lon": -99.1355, "rating": 4.2, "reviews": 240}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Clínica Premium", "lat": 19.4430, "lon": -99.1580, "rating": 4.5, "reviews": 420},
+      {"name": "Centro Médico Especializado", "lat": 19.4410, "lon": -99.1600, "rating": 4.4, "reviews": 350}
+    ],
+    "Iztapalapa": [
+      {"name": "Centro de Salud Popular", "lat": 19.3600, "lon": -99.0900, "rating": 3.9, "reviews": 180},
+      {"name": "Clínica Comunitaria", "lat": 19.3620, "lon": -99.0880, "rating": 4.0, "reviews": 210}
+    ]
+  },
+  "711100": {
+    "Cuauhtémoc": [
+      {"name": "Salón de Belleza Glamour", "lat": 19.4326, "lon": -99.1332, "rating": 4.3, "reviews": 520},
+      {"name": "Barbería Clásica", "lat": 19.4350, "lon": -99.1298, "rating": 4.2, "reviews": 380},
+      {"name": "Spa Centro", "lat": 19.4335, "lon": -99.1355, "rating": 4.4, "reviews": 650},
+      {"name": "Estética Facial", "lat": 19.4310, "lon": -99.1290, "rating": 4.1, "reviews": 290}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Salón Premium", "lat": 19.4430, "lon": -99.1580, "rating": 4.5, "reviews": 780},
+      {"name": "Barbería Moderna", "lat": 19.4410, "lon": -99.1600, "rating": 4.3, "reviews": 450}
+    ],
+    "Iztapalapa": [
+      {"name": "Salón Popular", "lat": 19.3600, "lon": -99.0900, "rating": 3.9, "reviews": 210},
+      {"name": "Barbería del Barrio", "lat": 19.3620, "lon": -99.0880, "rating": 4.0, "reviews": 260}
+    ]
+  },
+  "722410": {
+    "Cuauhtémoc": [
+      {"name": "Cafetería del Centro", "lat": 19.4326, "lon": -99.1332, "rating": 4.2, "reviews": 890},
+      {"name": "Café Reforma", "lat": 19.4350, "lon": -99.1298, "rating": 4.3, "reviews": 1200},
+      {"name": "Espresso Bar", "lat": 19.4335, "lon": -99.1355, "rating": 4.1, "reviews": 650},
+      {"name": "Café Corazón", "lat": 19.4310, "lon": -99.1290, "rating": 4.4, "reviews": 1450},
+      {"name": "Cafetería Aroma", "lat": 19.4340, "lon": -99.1310, "rating": 4.0, "reviews": 520}
+    ],
+    "Miguel Hidalgo": [
+      {"name": "Café Distrito", "lat": 19.4430, "lon": -99.1580, "rating": 4.4, "reviews": 1680},
+      {"name": "Espresso Artesanal", "lat": 19.4410, "lon": -99.1600, "rating": 4.3, "reviews": 980},
+      {"name": "Café Ejecutivo", "lat": 19.4450, "lon": -99.1550, "rating": 4.2, "reviews": 750}
+    ],
+    "Benito Juárez": [
+      {"name": "Café Ejecutivo Sur", "lat": 19.4200, "lon": -99.1650, "rating": 4.1, "reviews": 620},
+      {"name": "Cafetería Premium", "lat": 19.4220, "lon": -99.1680, "rating": 4.3, "reviews": 850}
+    ],
+    "Iztapalapa": [
+      {"name": "Cafetería Popular", "lat": 19.3600, "lon": -99.0900, "rating": 3.8, "reviews": 280},
+      {"name": "Café del Barrio", "lat": 19.3620, "lon": -99.0880, "rating": 3.9, "reviews": 350}
+    ]
+  }
+}

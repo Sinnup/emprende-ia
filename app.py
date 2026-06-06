@@ -134,6 +134,7 @@ def load_data():
         "costs":          json.loads((d / "costs.json").read_text())["costs"],
         "crime":          json.loads((d / "crime-index.json").read_text()),
         "model":          json.loads((d / "viability-model.json").read_text()),
+        "competitors":    json.loads((d / "competitors.json").read_text()),
     }
 
 @st.cache_resource
@@ -460,6 +461,82 @@ with st.spinner("Claude está analizando tu caso…"):
         st.markdown(f'<div class="ai-box">{html_response}</div>', unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error al conectar con Claude API: {e}")
+
+# ── Competitor heatmap ───────────────────────────────────────────────────────
+st.divider()
+st.markdown("### 🗺️ Mapa de Competidores en la Zona")
+
+# Zone centres (CDMX approximate coordinates)
+ZONE_COORDS = {
+    "cuauhtemoc":                    (19.4326, -99.1332),
+    "benito_juarez":                 (19.3984, -99.1572),
+    "miguel_hidalgo":                (19.4270, -99.1961),
+    "coyoacan":                      (19.3467, -99.1617),
+    "alcaldia_alvaro_obregon":       (19.3608, -99.2003),
+    "alcaldia_venustiano_carranza":  (19.4236, -99.0987),
+    "alcaldia_iztacalco":            (19.3952, -99.0891),
+    "gustavo_madero":                (19.4920, -99.1155),
+    "iztapalapa":                    (19.3557, -99.0636),
+    "alcaldia_tlahuac":              (19.2918, -99.0072),
+    "alcaldia_xochimilco":           (19.2569, -99.1034),
+    "alcaldia_milpa_alta":           (19.1893, -98.9697),
+    "alcaldia_magdalena_contreras":  (19.3270, -99.2440),
+    "alcaldia_azcapotzalco":         (19.4886, -99.1853),
+    "alcaldia_la_paz":               (19.3635, -98.9567),
+    "alcaldia_villa_gustavo_madero": (19.5004, -99.1275),
+}
+
+try:
+    import folium
+    from streamlit_folium import st_folium
+
+    zone_name       = DATA["zones"][zone_key]["name"]          # "Cuauhtémoc"
+    competitors_for_type = DATA["competitors"].get(btype, {})
+    zone_competitors = competitors_for_type.get(zone_name, [])
+
+    lat, lon = ZONE_COORDS.get(zone_key, (19.4326, -99.1332))
+
+    fmap = folium.Map(location=[lat, lon], zoom_start=14, tiles="OpenStreetMap")
+
+    # Competitor markers — colour by rating
+    for comp in zone_competitors:
+        if comp["rating"] >= 4.5:   color = "darkred"
+        elif comp["rating"] >= 4.0: color = "red"
+        elif comp["rating"] >= 3.5: color = "orange"
+        else:                        color = "gray"
+        folium.CircleMarker(
+            location=[comp["lat"], comp["lon"]],
+            radius=8,
+            popup=f"<b>{comp['name']}</b><br>Rating: {comp['rating']}/5<br>Reseñas: {comp['reviews']:,}",
+            color=color, fill=True, fillColor=color, fillOpacity=0.7, weight=2,
+        ).add_to(fmap)
+
+    # Your location
+    folium.CircleMarker(
+        location=[lat, lon], radius=12,
+        popup="<b>Tu ubicación (aprox.)</b>",
+        color="blue", fill=True, fillColor="blue", fillOpacity=0.85, weight=3,
+    ).add_to(fmap)
+
+    if zone_competitors:
+        mc1, mc2 = st.columns([3, 1])
+        with mc1:
+            st_folium(fmap, width=700, height=500)
+        with mc2:
+            st.write("")
+            st.metric("Total competidores", len(zone_competitors))
+            avg_r = sum(c["rating"] for c in zone_competitors) / len(zone_competitors)
+            st.metric("Rating promedio", f"{avg_r:.1f}/5")
+            st.metric("Reseñas totales", f"{sum(c['reviews'] for c in zone_competitors):,}")
+            high = len([c for c in zone_competitors if c["rating"] >= 4.5])
+            st.metric("Bien calificados (≥4.5)", f"{high} ({100*high//len(zone_competitors)}%)")
+        st.info(f"📊 {len(zone_competitors)} competidores directos encontrados en {zone_name}")
+    else:
+        st_folium(fmap, width=700, height=400)
+        st.info(f"📍 Sin datos de competidores directos para {zone_name} — muestra la zona en el mapa")
+
+except ImportError:
+    st.warning("⚠️ Para ver el mapa instala: pip install folium streamlit-folium")
 
 st.divider()
 st.caption("📊 Datos: Ley de Establecimientos Mercantiles CDMX 2024 · RETYS · SEDUVI · INEGI  |  Hackathon SecretarIA 2026 · SEDECO")
