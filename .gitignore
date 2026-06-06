@@ -61,3 +61,5 @@ Thumbs.db
 venv/
 temp/
 scratch/
+secrets.properties
+.claude/secrets.properties
