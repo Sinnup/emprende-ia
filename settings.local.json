@@ -1,0 +1,224 @@
+{
+  "version": "1.0",
+  "environment": "local-development",
+  "mode": "unrestricted-full-access",
+  "permissions": {
+    "require_confirmation": false,
+    "require_approval": false,
+    "ask_before_modify": false,
+    "prompt_on_dangerous_operations": false,
+    "git": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_any_commit": true,
+      "allow_force_push": true,
+      "allow_reset": true,
+      "allow_rebase": true,
+      "allow_branch_management": true,
+      "allow_destructive_operations": true,
+      "allow_empty_commits": true,
+      "allow_commit_amendments": true,
+      "allow_tag_deletion": true,
+      "allow_history_rewriting": true,
+      "commit_restrictions": "none",
+      "message_restrictions": "none",
+      "author_restrictions": "none",
+      "push_restrictions": "none"
+    },
+    "python": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_any_execution": true,
+      "allow_system_access": true,
+      "allow_file_access": true,
+      "allow_network_access": true,
+      "allow_subprocess": true,
+      "allow_os_commands": true,
+      "allow_dangerous_operations": true,
+      "allow_eval": true,
+      "allow_exec": true,
+      "allow_import_any_package": true,
+      "allow_install_packages": true,
+      "allow_uninstall_packages": true,
+      "allow_pip": true,
+      "scope": "unrestricted",
+      "execution_restrictions": "none",
+      "import_restrictions": "none"
+    },
+    "network": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_any_url": true,
+      "allow_unrestricted_access": true,
+      "http": {
+        "enabled": true,
+        "require_permission": false,
+        "allow_any_domain": true,
+        "allow_any_port": true
+      },
+      "https": {
+        "enabled": true,
+        "require_permission": false,
+        "allow_any_domain": true,
+        "allow_any_port": true,
+        "allow_self_signed_certs": true
+      },
+      "dns": {
+        "enabled": true,
+        "require_permission": false
+      },
+      "sockets": {
+        "enabled": true,
+        "require_permission": false,
+        "allow_raw_sockets": true
+      }
+    },
+    "url_opening": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_any_url": true,
+      "allow_any_protocol": true,
+      "allow_file_urls": true,
+      "allow_data_urls": true,
+      "allow_javascript_urls": true,
+      "allow_mailto": true,
+      "allow_custom_protocols": true,
+      "browser_access": true,
+      "url_restrictions": "none"
+    },
+    "browser": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_open_tabs": true,
+      "allow_close_tabs": true,
+      "allow_navigate": true,
+      "allow_javascript_execution": true,
+      "allow_popup_windows": true,
+      "allow_downloads": true,
+      "allow_file_uploads": true
+    },
+    "shell": {
+      "enabled": true,
+      "require_permission": false,
+      "require_confirmation": false,
+      "allow_dangerous_commands": true,
+      "bash": {
+        "enabled": true,
+        "require_permission": false,
+        "scope": "all",
+        "allow_all_commands": true,
+        "timeout_ms": 300000,
+        "environment_vars": {
+          "expose_all": true
+        },
+        "allow_sudo": true,
+        "allow_rm": true,
+        "allow_system_commands": true,
+        "allow_network_commands": true
+      },
+      "curl": {
+        "enabled": true,
+        "require_permission": false,
+        "allow_any_url": true
+      },
+      "wget": {
+        "enabled": true,
+        "require_permission": false,
+        "allow_any_url": true
+      }
+    },
+    "files": {
+      "read": {
+        "enabled": true,
+        "require_permission": false,
+        "scope": "all",
+        "paths": ["**/*"]
+      },
+      "write": {
+        "enabled": true,
+        "require_permission": false,
+        "require_confirmation": false,
+        "scope": "all",
+        "paths": ["**/*"],
+        "allow_overwrite": true,
+        "allow_hidden_files": true,
+        "allow_system_files": true
+      },
+      "create": {
+        "enabled": true,
+        "require_permission": false,
+        "require_confirmation": false,
+        "scope": "all",
+        "paths": ["**/*"],
+        "allow_any_extension": true,
+        "allow_binary": true
+      },
+      "edit": {
+        "enabled": true,
+        "require_permission": false,
+        "require_confirmation": false,
+        "scope": "all",
+        "paths": ["**/*"],
+        "allow_partial_edits": true,
+        "allow_bulk_operations": true
+      },
+      "delete": {
+        "enabled": true,
+        "require_permission": false,
+        "require_confirmation": false,
+        "scope": "all",
+        "paths": ["**/*"]
+      }
+    }
+  },
+  "dialogs": {
+    "show_confirmations": false,
+    "show_warnings": false,
+    "show_info_messages": false,
+    "show_progress": true,
+    "interactive_mode": false,
+    "require_user_input": false
+  },
+  "development": {
+    "debug_mode": true,
+    "verbose_logging": true,
+    "show_all_errors": true,
+    "performance_monitoring": true,
+    "suppress_warnings": true
+  },
+  "restrictions": {
+    "none": true,
+    "no_limits": true,
+    "no_quotas": true,
+    "unlimited_operations": true,
+    "no_approval_needed": true,
+    "no_confirmations_needed": true
+  },
+  "project": {
+    "name": "SEDECO SME Viability Platform",
+    "root_directory": "./",
+    "source_directory": "./src",
+    "data_directory": "./.claude/data",
+    "context_directory": "./.claude"
+  },
+  "build": {
+    "auto_compile": true,
+    "watch_mode": true,
+    "cache_enabled": true,
+    "parallel_builds": true,
+    "auto_fix_errors": true
+  },
+  "hackathon": {
+    "event": "Hackathon SecretarIA",
+    "date": "2026-06-06",
+    "deadline": "17:00",
+    "reto": "Reto 2 - Viabilidad de Negocios CDMX",
+    "no_restrictions_mode": true,
+    "full_access_mode": true
+  }
+}

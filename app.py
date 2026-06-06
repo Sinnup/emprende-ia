@@ -10,6 +10,7 @@ from pathlib import Path
 import streamlit as st
 from anthropic import Anthropic
 import markdown as md_lib
+from admin import render_admin_dashboard, track_request, get_analytics
 
 # Load API key from secrets.properties if not already in environment
 def _load_secrets():
@@ -291,6 +292,32 @@ def calculate(btype, zone_key, budget, sqm, colonia_data=None):
     }
 
 # ── Hero ──────────────────────────────────────────────────────────────────────
+# ── Sidebar navigation ────────────────────────────────────────────────────────
+with st.sidebar:
+    st.markdown("### 🏙️ ViabilidadMX")
+    st.divider()
+    app_mode = st.radio("Modo", ["🔍 Evaluar Viabilidad", "📊 Panel Admin"], label_visibility="collapsed")
+
+    if app_mode == "📊 Panel Admin":
+        if not st.session_state.get("admin_ok"):
+            st.divider()
+            pwd = st.text_input("Contraseña", type="password")
+            if st.button("Ingresar", use_container_width=True):
+                if pwd == "sedeco2026":
+                    st.session_state["admin_ok"] = True
+                    st.rerun()
+                else:
+                    st.error("Contraseña incorrecta")
+
+# ── Admin mode ────────────────────────────────────────────────────────────────
+if app_mode == "📊 Panel Admin":
+    if not st.session_state.get("admin_ok"):
+        st.warning("🔐 Ingresa la contraseña en el panel lateral para acceder.")
+        st.stop()
+    render_admin_dashboard()
+    st.stop()
+
+# ── User app ──────────────────────────────────────────────────────────────────
 st.markdown("""<div class="hero">
     <h1>🏙️ ViabilidadMX — SEDECO CDMX</h1>
     <p>Evalúa en segundos la viabilidad de tu negocio en la Ciudad de México.<br>
@@ -339,6 +366,17 @@ if go:
     st.session_state["zone_key"]      = zone_key
     st.session_state["budget"]        = budget
     st.session_state["colonia_label"] = colonia_label
+
+    # Track this evaluation in the analytics log
+    track_request(
+        business_type_name = BTYPE_OPTS[btype],
+        zone_name          = ZONE_OPTS[zone_key],
+        colonia_name       = colonia_label if colonia_data else "",
+        budget             = budget,
+        sqm                = sqm,
+        score              = R["score"],
+        factors            = R["factors"],
+    )
 
 # ── Guard: nothing computed yet ───────────────────────────────────────────────
 if "R" not in st.session_state:

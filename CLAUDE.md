@@ -144,17 +144,31 @@ Build a tool that enables entrepreneurs/investors to:
 - **Critical Rule**: Procedure logic must match legal reality
 
 ### Pre-Download Strategy (Token & Network Savings)
-⚠️ **Important**: Download heavy data sources before event start to avoid network saturation
+✅ **Status**: COMPLETE - All critical PDFs processed and embedded
 
-1. **Download immediately**:
-   - Ley de Establecimientos Mercantiles (PDF)
-   - Reglamento (PDF)
-   - RETYS procedure catalog (export from web interface)
-   - DENUE sample data (CSV from INEGI)
+**Downloaded & Processed**:
+- ✅ Ley de Establecimientos Mercantiles (23,222 chars extracted)
+- ✅ Reglamento de la Ley (19,423 chars extracted)
+- ✅ Manuales Cenproin (10,326 chars extracted)
 
-2. **Cache locations**: Store in `.claude/context/legal/` and `.claude/context/data/`
+**Cache locations**: 
+- Legal summaries: `.claude/legal/` (2 markdown files)
+- Production data: `.claude/data/` (10 JSON files, 52 KB)
+- Context files: `.claude/context/` (all PDFs)
 
-3. **Network-sensitive**: SEDUVI land use server often overloaded
+**Data Files Ready**:
+1. business-types.json (1.8 KB) - SCIAN taxonomy
+2. zones.json (8.6 KB) - 16 CDMX zones
+3. procedures.json (5.8 KB) - 10 procedures from legal framework
+4. costs.json (3.0 KB) - Cost models
+5. crime-index.json (2.7 KB) - Security data
+6. viability-model.json (2.4 KB) - 6-factor scoring algorithm
+7. query-index.json (1.4 KB) - Fast lookup indices
+8. cenproin-training-context.json (1.3 KB) - **NEW** Training modules
+9. regulatory-costs.json (811 B) - **NEW** Official costs from legal docs
+10. README.md (3.4 KB) - Data documentation
+
+**Ready for Backend Build**: YES ✅
 
 ---
 
@@ -245,6 +259,22 @@ repo/
 - GitHub repo link (must be public)
 - Video link
 - Live product link (if applicable)
+
+---
+
+## Language Requirement
+
+### User Interface Language
+🇲🇽 **SPANISH ONLY** (Visually)
+
+- All form labels → Spanish
+- All button text → Spanish
+- All results/metrics → Spanish
+- All error messages → Spanish
+- All Claude API responses → Spanish
+- All user-facing text → Spanish
+
+**Internal code** (comments, variable names, logic) can be English.
 
 ---
 
@@ -381,26 +411,32 @@ A tool that demonstrates:
 
 ## Next Steps
 
-1. **Before Event**:
-   - [ ] Download legal PDFs to `.claude/context/legal/`
-   - [ ] Export RETYS procedures to `.claude/context/data/`
-   - [ ] Create synthetic market data samples
-   - [ ] Test API keys for chosen stack
-   - [ ] Prepare screen recording tool
-   - [ ] Set up GitHub repo structure
+### Phase 1: Pre-Processing (✅ COMPLETED)
+- [x] Download legal PDFs to context folder
+- [x] Extract and process 3 critical PDFs (Ley, Reglamento, Manuales Cenproin)
+- [x] Create 10 production data files (52 KB)
+- [x] Create all agent definitions (3 agents)
+- [x] Create all module instructions (2 modules)
+- [x] Create all tools & workflows
+- [x] Prepare data summary for Claude Code integration
+- [x] Verify data consistency and legal compliance
 
-2. **Day Of (09:00 start)**:
-   - [ ] Form team (3-5 people)
-   - [ ] Choose Reto 2
-   - [ ] Define MVP scope (modules 1-2 core)
-   - [ ] Set up git workflow (atomic commits)
-   - [ ] Divide work: legal/data, UI/logic, demo
+### Phase 2: Backend Development (🔄 IN PROGRESS)
+- [ ] Task #11: Build FastAPI backend with 4 endpoints
+  - POST /api/viability-check
+  - GET /api/cost-estimate/{scian}/{zone}/{sqm}
+  - GET /api/procedures/{business_type}
+  - GET /api/zone/{zone_code}
+- [ ] Task #12: Implement 6-factor viability scoring algorithm
+- [ ] Task #13: Build React/HTML frontend (form + dashboard)
 
-3. **Before 17:00**:
-   - [ ] Code in main branch
-   - [ ] Record demo video
-   - [ ] Submit form (16:00-17:00 window)
-   - [ ] Push final commit before 17:00
+### Phase 3: Polish & Demo (⏳ PENDING)
+- [ ] Task #14: Add styling, testing, and polish
+- [ ] Task #15: Deploy to GitHub and Vercel/Railway
+- [ ] Task #16: Record 3-minute demo video (no cuts)
+- [ ] Task #17: Submit to hackathon form (16:00-17:00 window)
+
+**Current Status**: All data pre-processed and embedded. Ready for Claude Code backend build.
 
 ---
 
@@ -412,4 +448,22 @@ If two teams score equally:
 
 ---
 
-*Last Updated: June 6, 2026 — Ready for hackathon* 🚀
+---
+
+## Current Status Dashboard
+
+| Phase | Task | Status | Completion |
+|-------|------|--------|------------|
+| Pre-Processing | Tasks 1-10 | ✅ Complete | 100% |
+| Data Extraction | Task 7 (PDFs) | ✅ Complete | 100% |
+| Backend Dev | Task 11-12 | 🔄 Next | 0% |
+| Frontend Dev | Task 13 | ⏳ Pending | 0% |
+| Polish & Demo | Task 14-17 | ⏳ Pending | 0% |
+
+**Data Ready**: 10 files, 52 KB, 100% legal-compliant  
+**Backend Ready**: All 4 endpoints specified and data-mapped  
+**Demo Timeline**: ~7 hours remaining (freeze at 17:00)
+
+---
+
+*Last Updated: June 6, 2026 — Phase 1 Complete, Phase 2 Ready* 🚀

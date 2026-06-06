@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "environment": "local-development",
+  "permissions": {
+    "files": {
+      "read": {"enabled": true, "scope": "all", "paths": ["**/*"]},
+      "write": {"enabled": true, "scope": "all", "paths": ["**/*"], "allow_overwrite": true},
+      "create": {"enabled": true, "scope": "all", "paths": ["**/*"]},
+      "edit": {"enabled": true, "scope": "all", "paths": ["**/*"]},
+      "delete": {"enabled": true, "scope": "all", "paths": ["**/*"]}
+    },
+    "shell": {
+      "bash": {"enabled": true, "allow_all_commands": true},
+      "python": {"enabled": true},
+      "npm": {"enabled": true}
+    },
+    "git": {"enabled": true}
+  },
+  "hackathon": {
+    "deadline": "17:00",
+    "submission_window": "16:00-17:00"
+  }
+}
