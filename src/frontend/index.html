@@ -7,149 +7,244 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
+        /* ── Brand tokens ─────────────────────────────────────────────────── */
         :root {
-            --cdmx-blue: #1a3c7b;
-            --cdmx-red: #c8102e;
+            --teal:        #104C42;
+            --teal-mid:    #235B4E;
+            --magenta:     #88185B;
+            --magenta-dk:  #631135;
+            --lavender:    #9482A3;
+            --gold:        #BC955C;
+            --bg:          #F5F0F3;
+            --card:        #ffffff;
+            --border:      #EDE0E8;
+            --text:        #1f2937;
+            --muted:       #6b7280;
         }
-        body { background: #f0f2f7; font-family: 'Segoe UI', system-ui, sans-serif; }
-        .top-nav {
-            background: var(--cdmx-blue);
-            padding: 0.75rem 0;
+
+        /* ── Agency colour map ────────────────────────────────────────────── */
+        :root {
+            --sat:        #1565C0;
+            --comercio:   #6A1B9A;
+            --seduvi:     #2E7D32;
+            --ventanilla: #E65100;
+            --sedema:     #00695C;
+            --salud:      #C62828;
+            --imss:       #1B5E20;
+            --seguro:     #37474F;
         }
-        .hero-section {
-            background: linear-gradient(135deg, #1a3c7b 0%, #2563eb 100%);
-            color: white;
-            padding: 3rem 0 5rem;
+
+        /* ── Base ─────────────────────────────────────────────────────────── */
+        * { box-sizing: border-box; }
+        body { background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); margin: 0; }
+
+        /* ── Nav ──────────────────────────────────────────────────────────── */
+        .top-nav { background: var(--teal); padding: .75rem 0; }
+        .top-nav .brand { color: #fff; font-size: 1.15rem; font-weight: 800; text-decoration: none; }
+        .top-nav .subtitle { color: rgba(255,255,255,.65); font-size: .8rem; }
+
+        /* ── Hero ─────────────────────────────────────────────────────────── */
+        .hero { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%); color: #fff; padding: 3rem 0 5.5rem; }
+        .hero h1 { font-size: 2.1rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+        .hero .lead { opacity: .88; max-width: 580px; font-size: 1rem; }
+        .hero-badge { display: inline-block; background: rgba(188,149,92,.28); color: var(--gold); border-radius: 20px; padding: 4px 14px; font-size: .8rem; font-weight: 600; }
+
+        /* ── Form card ────────────────────────────────────────────────────── */
+        .form-card { background: var(--card); border-radius: 20px; padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,.16); margin-top: -4rem; }
+        .form-card .card-title { color: var(--teal); font-weight: 700; font-size: 1rem; margin-bottom: 1.25rem; }
+        .btn-submit {
+            background: var(--magenta); color: #fff; border: none;
+            border-radius: 12px; font-weight: 700; font-size: 1rem;
+            padding: .75rem 1.5rem; width: 100%; transition: .2s;
         }
-        .hero-section h1 { font-size: 2.1rem; font-weight: 800; line-height: 1.2; }
-        .hero-section .lead { opacity: 0.9; max-width: 600px; }
-        .form-card {
-            background: white;
-            border-radius: 18px;
-            padding: 2rem;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-            margin-top: -3rem;
-        }
-        .btn-check-viability {
-            background: var(--cdmx-blue);
-            border: none;
-            color: white;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.05rem;
-            padding: 0.8rem 2rem;
-            transition: all 0.2s;
-        }
-        .btn-check-viability:hover { background: #152e60; color: white; transform: translateY(-1px); }
-        .results-card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .section-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-        /* Score gauge */
-        .gauge-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto; }
-        .gauge-center {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center; pointer-events: none;
-        }
-        .gauge-score { font-size: 2.8rem; font-weight: 800; line-height: 1; }
-        .gauge-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-        /* Factors */
-        .factor-row { display: flex; align-items: center; gap: 10px; margin-bottom: 0.9rem; }
-        .factor-icon { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
-        .factor-meta { flex: 1; min-width: 0; }
-        .factor-bar-bg { height: 8px; border-radius: 4px; background: #e5e7eb; overflow: hidden; }
-        .factor-bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
-        .factor-score-badge { font-size: 0.75rem; font-weight: 700; color: #374151; white-space: nowrap; flex-shrink: 0; }
-        /* Risk badges */
-        .risk-chip { display: inline-block; border-radius: 20px; padding: 3px 12px; font-size: 0.8rem; font-weight: 600; }
-        .risk-Alto  { background: #fee2e2; color: #b91c1c; }
-        .risk-Medio { background: #fef3c7; color: #92400e; }
-        .risk-Bajo  { background: #d1fae5; color: #065f46; }
-        /* Procedure list */
-        .proc-step { display: flex; gap: 12px; margin-bottom: 1.2rem; }
-        .proc-num {
-            flex-shrink: 0;
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            background: var(--cdmx-blue);
-            color: white;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 0.85rem;
-        }
-        .proc-body { flex: 1; border-left: 2px solid #e5e7eb; padding-left: 12px; }
-        .proc-name { font-weight: 700; font-size: 0.95rem; }
-        .proc-meta { font-size: 0.8rem; color: #6b7280; }
-        .proc-badge { display: inline-block; border-radius: 6px; padding: 1px 8px; font-size: 0.75rem; font-weight: 600; background: #eff6ff; color: #1d4ed8; }
-        /* Recommendation box */
-        .rec-box { border-radius: 12px; padding: 1.1rem 1.25rem; border-left: 4px solid; }
-        .rec-alta  { background: #f0fdf4; border-color: #16a34a; }
-        .rec-viable { background: #eff6ff; border-color: #1a3c7b; }
-        .rec-marginal { background: #fff7ed; border-color: #ea580c; }
-        .rec-no { background: #fef2f2; border-color: #dc2626; }
-        /* Cost table */
-        .cost-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem; }
-        .cost-row:last-child { border-bottom: none; }
-        .cost-val { font-weight: 700; }
-        /* Footer */
-        .footer-bar { background: var(--cdmx-blue); color: rgba(255,255,255,0.8); padding: 1rem 0; font-size: 0.8rem; margin-top: 3rem; }
+        .btn-submit:hover { background: var(--magenta-dk); color: #fff; transform: translateY(-1px); }
+        .form-select, .form-control { border-color: var(--border); }
+        .form-select:focus, .form-control:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(136,24,91,.12); }
+
+        /* ── Loading ──────────────────────────────────────────────────────── */
         #loadingState { display: none; }
+        .spinner-ring { width: 2.5rem; height: 2.5rem; border: 3px solid var(--border); border-top-color: var(--magenta); border-radius: 50%; animation: spin .7s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Results ──────────────────────────────────────────────────────── */
         #resultsSection { display: none; }
+        .results-card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 3px 16px rgba(0,0,0,.07); height: 100%; }
+        .section-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--magenta); margin-bottom: 1rem; }
+
+        /* ── Score hero banner ────────────────────────────────────────────── */
+        .score-banner { border-radius: 20px; padding: 2rem; color: #fff; margin-bottom: 1.25rem; }
+        .score-banner.alta    { background: linear-gradient(135deg,#1b5e20,#2e7d32); }
+        .score-banner.viable  { background: linear-gradient(135deg,var(--magenta-dk),var(--magenta)); }
+        .score-banner.marginal{ background: linear-gradient(135deg,#7f3200,#e65100); }
+        .score-banner.no      { background: linear-gradient(135deg,#7f0000,#c62828); }
+        .score-number { font-size: 5rem; font-weight: 900; line-height: 1; }
+        .score-label  { font-size: 1.4rem; font-weight: 700; opacity: .95; }
+        .score-rec    { font-size: .92rem; opacity: .85; margin-top: .5rem; }
+        .score-prob   { font-size: .8rem; opacity: .75; margin-top: .75rem; }
+
+        /* ── Factor cards ─────────────────────────────────────────────────── */
+        .factor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+        .factor-card { background: var(--bg); border-radius: 12px; padding: .9rem 1rem; }
+        .factor-card .f-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .5rem; }
+        .factor-card .f-name { font-size: .82rem; font-weight: 700; }
+        .factor-card .f-badge { font-size: .7rem; font-weight: 700; border-radius: 8px; padding: 2px 8px; }
+        .badge-good    { background: #d1fae5; color: #065f46; }
+        .badge-ok      { background: #fef3c7; color: #92400e; }
+        .badge-bad     { background: #fee2e2; color: #991b1b; }
+        .factor-bar-bg { height: 6px; border-radius: 3px; background: #e5e7eb; overflow: hidden; margin-bottom: .3rem; }
+        .factor-bar-fill { height: 100%; border-radius: 3px; transition: width .9s cubic-bezier(.4,0,.2,1); }
+        .factor-score { font-size: .75rem; font-weight: 700; color: var(--muted); }
+        .factor-detail { font-size: .72rem; color: var(--muted); }
+
+        /* ── Cost table ───────────────────────────────────────────────────── */
+        .cost-item { display: flex; justify-content: space-between; align-items: center; padding: .4rem 0; border-bottom: 1px solid var(--border); }
+        .cost-item:last-child { border: none; }
+        .cost-label { font-size: .85rem; color: var(--text); }
+        .cost-value { font-size: .85rem; font-weight: 700; }
+        .cost-sub { font-size: .75rem; color: var(--muted); }
+        .cost-section-head { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--magenta); margin: .75rem 0 .25rem; }
+
+        /* ── Risk rows ────────────────────────────────────────────────────── */
+        .risk-row { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .7rem; }
+        .risk-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+        .risk-dot.Alto  { background: #dc2626; }
+        .risk-dot.Medio { background: #d97706; }
+        .risk-dot.Bajo  { background: #16a34a; }
+        .risk-cat  { font-size: .78rem; font-weight: 700; }
+        .risk-lv   { font-size: .72rem; border-radius: 8px; padding: 1px 8px; font-weight: 600; display: inline-block; }
+        .risk-lv.Alto  { background: #fee2e2; color: #991b1b; }
+        .risk-lv.Medio { background: #fef3c7; color: #92400e; }
+        .risk-lv.Bajo  { background: #d1fae5; color: #065f46; }
+        .risk-detail { font-size: .78rem; color: var(--muted); }
+
+        /* ── Recommendation box ───────────────────────────────────────────── */
+        .rec-box { border-radius: 12px; padding: 1rem 1.1rem; border-left: 4px solid; margin-top: 1rem; }
+        .rec-alta    { background: #f0fdf4; border-color: #16a34a; }
+        .rec-viable  { background: #fdf0f6; border-color: var(--magenta); }
+        .rec-marginal{ background: #fff7ed; border-color: #ea580c; }
+        .rec-no      { background: #fef2f2; border-color: #dc2626; }
+
+        /* ── Zone card ────────────────────────────────────────────────────── */
+        .zone-metric { display: flex; align-items: center; gap: .5rem; padding: .45rem 0; border-bottom: 1px solid var(--border); }
+        .zone-metric:last-child { border: none; }
+        .zone-metric .zm-icon { font-size: 1rem; width: 22px; text-align: center; }
+        .zone-metric .zm-label { font-size: .8rem; color: var(--muted); flex: 1; }
+        .zone-metric .zm-val { font-size: .82rem; font-weight: 700; }
+        .zone-tag { display: inline-block; background: var(--border); color: var(--teal); border-radius: 20px; padding: 2px 10px; font-size: .72rem; font-weight: 600; margin: 2px; }
+
+        /* ── Support programs ─────────────────────────────────────────────── */
+        .support-item { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .5rem; }
+        .support-bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+        .support-text { font-size: .82rem; color: var(--text); }
+
+        /* ── Procedure timeline ───────────────────────────────────────────── */
+        .proc-timeline { position: relative; }
+        .proc-timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: var(--border); z-index: 0; }
+        .proc-step { display: flex; gap: 1rem; margin-bottom: 1.1rem; position: relative; z-index: 1; }
+        .proc-dot {
+            flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: .85rem; color: #fff;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 2px currentColor;
+        }
+        .proc-card { flex: 1; background: var(--bg); border-radius: 12px; padding: .85rem 1rem; border-left: 3px solid; }
+        .proc-name { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
+        .proc-desc { font-size: .78rem; color: var(--muted); margin-bottom: .4rem; }
+        .proc-pill { display: inline-flex; align-items: center; gap: 3px; border-radius: 20px; padding: 2px 10px; font-size: .72rem; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
+        .proc-docs { font-size: .75rem; color: var(--muted); margin-top: .4rem; }
+        .proc-dep { font-size: .72rem; color: var(--muted); margin-top: .2rem; font-style: italic; }
+
+        /* Agency colours */
+        .ag-sat        { color: var(--sat); }
+        .ag-comercio   { color: var(--comercio); }
+        .ag-seduvi     { color: var(--seduvi); }
+        .ag-ventanilla { color: var(--ventanilla); }
+        .ag-sedema     { color: var(--sedema); }
+        .ag-salud      { color: var(--salud); }
+        .ag-imss       { color: var(--imss); }
+        .ag-seguro     { color: var(--seguro); }
+        .border-sat        { border-color: var(--sat) !important; }
+        .border-comercio   { border-color: var(--comercio) !important; }
+        .border-seduvi     { border-color: var(--seduvi) !important; }
+        .border-ventanilla { border-color: var(--ventanilla) !important; }
+        .border-sedema     { border-color: var(--sedema) !important; }
+        .border-salud      { border-color: var(--salud) !important; }
+        .border-imss       { border-color: var(--imss) !important; }
+        .border-seguro     { border-color: var(--seguro) !important; }
+        .bg-sat        { background: var(--sat) !important; }
+        .bg-comercio   { background: var(--comercio) !important; }
+        .bg-seduvi     { background: var(--seduvi) !important; }
+        .bg-ventanilla { background: var(--ventanilla) !important; }
+        .bg-sedema     { background: var(--sedema) !important; }
+        .bg-salud      { background: var(--salud) !important; }
+        .bg-imss       { background: var(--imss) !important; }
+        .bg-seguro     { background: var(--seguro) !important; }
+
+        /* Agency pill backgrounds (light) */
+        .pill-sat        { background: #e3f2fd; color: var(--sat); }
+        .pill-comercio   { background: #f3e5f5; color: var(--comercio); }
+        .pill-seduvi     { background: #e8f5e9; color: var(--seduvi); }
+        .pill-ventanilla { background: #fff3e0; color: var(--ventanilla); }
+        .pill-sedema     { background: #e0f2f1; color: var(--sedema); }
+        .pill-salud      { background: #ffebee; color: var(--salud); }
+        .pill-imss       { background: #e8f5e9; color: var(--imss); }
+        .pill-seguro     { background: #eceff1; color: var(--seguro); }
+
+        /* ── Chart container ──────────────────────────────────────────────── */
+        .chart-wrap { position: relative; }
+
+        /* ── Timeline summary strip ───────────────────────────────────────── */
+        .timeline-strip { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+        .tl-chip { border-radius: 20px; padding: 4px 14px; font-size: .78rem; font-weight: 600; background: var(--border); color: var(--teal); }
+
+        /* ── Footer ───────────────────────────────────────────────────────── */
+        .footer { background: var(--teal); color: rgba(255,255,255,.72); padding: 1rem 0; font-size: .78rem; margin-top: 3rem; }
+
+        /* ── Responsive ───────────────────────────────────────────────────── */
+        @media (max-width: 576px) {
+            .factor-grid { grid-template-columns: 1fr; }
+            .score-number { font-size: 3.5rem; }
+        }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
+<!-- ── Navbar ──────────────────────────────────────────────────────────────── -->
 <div class="top-nav">
     <div class="container d-flex justify-content-between align-items-center">
-        <span class="text-white fw-bold fs-5">🏙️ ViabilidadMX</span>
-        <span class="text-white opacity-75 small d-none d-md-inline">SEDECO Ciudad de México · SecretarIA Hackathon 2026</span>
+        <a href="#" class="brand">🏙️ ViabilidadMX</a>
+        <span class="subtitle d-none d-md-inline">SEDECO Ciudad de México · SecretarIA Hackathon 2026</span>
     </div>
 </div>
 
-<!-- Hero -->
-<div class="hero-section">
+<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<div class="hero">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <h1>¿Es viable tu negocio<br>en Ciudad de México?</h1>
-                <p class="lead mt-3">
-                    Evalúa en segundos la viabilidad de tu establecimiento,
-                    los trámites requeridos y el costo de apertura —
-                    basado en datos reales del RETYS y la Ley de Establecimientos Mercantiles.
-                </p>
-                <div class="d-flex gap-3 mt-4 flex-wrap">
-                    <span class="badge rounded-pill px-3 py-2" style="background:rgba(255,255,255,0.15); font-size:0.85rem;">📊 9 tipos de negocio</span>
-                    <span class="badge rounded-pill px-3 py-2" style="background:rgba(255,255,255,0.15); font-size:0.85rem;">🗺️ 16 alcaldías CDMX</span>
-                    <span class="badge rounded-pill px-3 py-2" style="background:rgba(255,255,255,0.15); font-size:0.85rem;">⚖️ 8 trámites RETYS</span>
-                </div>
+        <div class="col-lg-7">
+            <h1>¿Es viable tu negocio<br>en Ciudad de México?</h1>
+            <p class="lead">Evalúa en segundos la viabilidad de tu establecimiento, los trámites requeridos y los costos de apertura — basado en datos reales del RETYS y la Ley de Establecimientos Mercantiles.</p>
+            <div class="d-flex gap-2 mt-3 flex-wrap">
+                <span class="hero-badge">📊 9 giros SCIAN</span>
+                <span class="hero-badge">🗺️ 16 alcaldías CDMX</span>
+                <span class="hero-badge">⚖️ RETYS + Ley 2024</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Form -->
-<div class="container pb-2">
+<!-- ── Form ────────────────────────────────────────────────────────────────── -->
+<div class="container pb-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="form-card">
-                <h6 class="fw-bold mb-4" style="color: var(--cdmx-blue);">Ingresa los datos de tu negocio</h6>
-                <form id="viabilityForm">
+                <div class="card-title">Ingresa los datos de tu negocio</div>
+                <form id="viabilityForm" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold small">Tipo de negocio</label>
+                            <label class="form-label small fw-semibold">Tipo de negocio (SCIAN)</label>
                             <select class="form-select" id="businessType" required>
-                                <option value="">Selecciona un tipo...</option>
+                                <option value="">Selecciona un giro...</option>
                                 <option value="722110">🍽️ Restaurante de servicio completo</option>
                                 <option value="722210">☕ Cafetería</option>
                                 <option value="461110">🛒 Tienda de abarrotes</option>
@@ -162,7 +257,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold small">Alcaldía</label>
+                            <label class="form-label small fw-semibold">Alcaldía</label>
                             <select class="form-select" id="zone" required>
                                 <option value="">Selecciona una alcaldía...</option>
                                 <option value="cuauhtemoc">Cuauhtémoc (Centro Histórico)</option>
@@ -184,29 +279,29 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label fw-semibold small">Capital disponible (MXN)</label>
+                            <label class="form-label small fw-semibold">Capital disponible (MXN)</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input type="number" class="form-control" id="budget" value="200000" min="10000" step="10000" required>
+                                <input type="number" class="form-control" id="budget" value="200000" min="1000" step="5000" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label fw-semibold small">Superficie del local (m²)</label>
+                            <label class="form-label small fw-semibold">Superficie del local</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="sqm" value="80" min="10" step="5" required>
+                                <input type="number" class="form-control" id="sqm" value="80" min="5" max="9999" step="5" required>
                                 <span class="input-group-text">m²</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label fw-semibold small">Tipo de persona</label>
+                            <label class="form-label small fw-semibold">Tipo de persona</label>
                             <select class="form-select" id="entityType">
                                 <option value="individual">Persona Física</option>
-                                <option value="moral">Persona Moral (Empresa)</option>
+                                <option value="moral">Persona Moral (S.A. / S. de R.L.)</option>
                             </select>
                         </div>
                         <div class="col-12 mt-1">
-                            <button type="submit" class="btn btn-check-viability w-100">
-                                🔍 Verificar Viabilidad del Negocio
+                            <button type="submit" class="btn-submit">
+                                🔍 Evaluar Viabilidad del Negocio
                             </button>
                         </div>
                     </div>
@@ -216,327 +311,401 @@
     </div>
 </div>
 
-<!-- Loading -->
-<div id="loadingState" class="container mt-4">
+<!-- ── Loading ─────────────────────────────────────────────────────────────── -->
+<div id="loadingState" class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-lg-10 text-center py-5">
-            <div class="spinner-border mb-3" style="color:var(--cdmx-blue);width:2.5rem;height:2.5rem;" role="status"></div>
-            <p class="text-muted">Consultando datos del RETYS, SEDUVI y modelo de viabilidad...</p>
+        <div class="col-lg-10 text-center py-4">
+            <div class="spinner-ring mx-auto mb-3"></div>
+            <p class="text-muted small">Consultando RETYS · SEDUVI · Modelo de viabilidad…</p>
         </div>
     </div>
 </div>
 
-<!-- Results -->
-<div id="resultsSection" class="container mt-4">
+<!-- ── Results ─────────────────────────────────────────────────────────────── -->
+<div id="resultsSection" class="container pb-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
 
-            <!-- Score + Factors -->
-            <div class="row g-3 mb-3">
-                <div class="col-md-4">
-                    <div class="results-card h-100 d-flex flex-column align-items-center justify-content-center text-center">
-                        <div class="section-label w-100">Puntaje de Viabilidad</div>
-                        <div class="gauge-wrapper">
-                            <svg viewBox="0 0 180 180" width="180" height="180">
-                                <circle cx="90" cy="90" r="78" fill="none" stroke="#e5e7eb" stroke-width="14"/>
-                                <circle id="gaugeArc" cx="90" cy="90" r="78" fill="none"
-                                    stroke="#1a3c7b" stroke-width="14" stroke-linecap="round"
-                                    stroke-dasharray="490" stroke-dashoffset="490"
-                                    transform="rotate(-90 90 90)"
-                                    style="transition: stroke-dashoffset 1s ease, stroke 0.5s ease;"/>
-                            </svg>
-                            <div class="gauge-center">
-                                <div class="gauge-score" id="gaugeScore" style="color:#1a3c7b">—</div>
-                                <div class="gauge-label" id="gaugeLabel" style="color:#6b7280">—</div>
-                            </div>
-                        </div>
-                        <div class="mt-3 w-100">
-                            <div class="fw-bold" id="successProb" style="font-size:0.9rem;color:#374151"></div>
-                            <div class="text-muted" style="font-size:0.75rem">tasa histórica de éxito</div>
-                        </div>
+            <!-- Score banner -->
+            <div id="scoreBanner" class="score-banner viable mb-3">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="score-number" id="scoreNum">—</div>
+                        <div style="font-size:.75rem;opacity:.7;font-weight:600;">/ 100</div>
+                    </div>
+                    <div class="col">
+                        <div class="score-label" id="scoreLabel">—</div>
+                        <div class="score-rec" id="scoreRec"></div>
+                        <div class="score-prob" id="scoreProb"></div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="results-card h-100">
-                        <div class="section-label">Factores de Evaluación (6 dimensiones)</div>
-                        <div id="factorsContainer"></div>
-                    </div>
-                </div>
+            </div>
+
+            <!-- Factor grid -->
+            <div class="results-card mb-3">
+                <div class="section-label">Evaluación por Factor (6 dimensiones · máx. 100 pts)</div>
+                <div class="factor-grid" id="factorGrid"></div>
             </div>
 
             <!-- Costs + Risks -->
             <div class="row g-3 mb-3">
                 <div class="col-md-5">
-                    <div class="results-card h-100">
+                    <div class="results-card">
                         <div class="section-label">Desglose de Costos</div>
                         <div id="costsContainer"></div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="results-card h-100">
+                    <div class="results-card">
                         <div class="section-label">Evaluación de Riesgos</div>
-                        <div id="risksContainer" class="mb-3"></div>
-                        <div id="recommendationBox" class="rec-box rec-viable">
-                            <div class="fw-bold mb-1">📋 Recomendación SEDECO</div>
-                            <div id="recommendationText" style="font-size:0.9rem;"></div>
+                        <div id="risksContainer"></div>
+                        <div id="recBox" class="rec-box rec-viable mt-3">
+                            <div class="fw-bold mb-1" style="font-size:.85rem;">📋 Recomendación SEDECO</div>
+                            <div id="recText" style="font-size:.85rem;"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Cash flow chart -->
+            <div class="results-card mb-3">
+                <div class="section-label">Proyección Financiera — 12 meses</div>
+                <div class="chart-wrap">
+                    <canvas id="cashChart" height="100"></canvas>
+                </div>
+            </div>
+
+            <!-- Zone + Support -->
             <div class="row g-3 mb-3">
-                <div class="col-12">
+                <div class="col-md-5">
                     <div class="results-card">
-                        <div class="section-label">Proyección de Flujo de Caja — 12 meses</div>
-                        <canvas id="cashflowChart" height="90"></canvas>
+                        <div class="section-label">Perfil de Alcaldía</div>
+                        <div id="zoneContainer"></div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="results-card">
+                        <div class="section-label">Programas de Apoyo CDMX (Cenproin)</div>
+                        <div id="supportContainer"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Procedures -->
-            <div class="row g-3 mb-3">
-                <div class="col-12">
-                    <div class="results-card">
-                        <div class="section-label">Hoja de Ruta Regulatoria — Trámites en Orden</div>
-                        <div id="procedureSummary" class="d-flex gap-2 flex-wrap mb-3"></div>
-                        <div id="proceduresContainer"></div>
-                    </div>
-                </div>
+            <!-- Procedure roadmap -->
+            <div class="results-card mb-3">
+                <div class="section-label">Hoja de Ruta Regulatoria — Trámites en Orden (RETYS)</div>
+                <div class="timeline-strip" id="tlStrip"></div>
+                <div class="proc-timeline" id="procTimeline"></div>
+                <!-- Agency legend -->
+                <div id="agencyLegend" class="d-flex flex-wrap gap-2 mt-3" style="border-top:1px solid var(--border);padding-top:.75rem;"></div>
             </div>
 
         </div>
     </div>
 </div>
 
-<!-- Footer -->
-<div class="footer-bar">
+<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
+<div class="footer">
     <div class="container d-flex flex-wrap justify-content-between gap-2">
-        <span>ViabilidadMX — Hackathon SecretarIA 2026 · SEDECO CDMX</span>
+        <span>ViabilidadMX · Hackathon SecretarIA 2026 · SEDECO CDMX</span>
         <span>Datos: RETYS · SEDUVI · Ley de Establecimientos Mercantiles 2024</span>
     </div>
 </div>
 
 <script>
-const CIRCUMFERENCE = 2 * Math.PI * 78; // ~490
+/* ── Agency config ─────────────────────────────────────────────────────────── */
+const AGENCY_MAP = {
+    'SAT':          { key: 'sat',        label: 'SAT' },
+    'Cámara de Comercio CDMX': { key: 'comercio', label: 'Cámara de Comercio' },
+    'SEDUVI':       { key: 'seduvi',     label: 'SEDUVI' },
+    'Delegación - Ventanilla Única': { key: 'ventanilla', label: 'Ventanilla Única' },
+    'SIAPEM - SEDEMA': { key: 'sedema', label: 'SEDEMA / SIAPEM' },
+    'Secretaría de Salud CDMX': { key: 'salud',  label: 'Secretaría de Salud' },
+    'IMSS':         { key: 'imss',       label: 'IMSS' },
+    'Insurance Company': { key: 'seguro', label: 'Aseguradora' },
+};
+function agencyKey(agency) {
+    const entry = Object.entries(AGENCY_MAP).find(([k]) => agency.includes(k.split(' ')[0]));
+    return entry ? entry[1].key : 'seguro';
+}
+function agencyLabel(agency) {
+    const entry = Object.entries(AGENCY_MAP).find(([k]) => agency.includes(k.split(' ')[0]));
+    return entry ? entry[1].label : agency;
+}
 
+/* ── Factor config ─────────────────────────────────────────────────────────── */
 const FACTOR_META = {
-    budget:      { label: 'Capital Disponible',      icon: '💰' },
-    competition: { label: 'Saturación de Mercado',   icon: '🏪' },
-    location:    { label: 'Tráfico Peatonal',        icon: '📍' },
-    security:    { label: 'Seguridad de Zona',       icon: '🛡️' },
-    growth:      { label: 'Crecimiento Económico',   icon: '📈' },
-    legal:       { label: 'Factibilidad Regulatoria',icon: '⚖️' },
+    budget:      { label: 'Capital Disponible',       icon: '💰' },
+    competition: { label: 'Saturación de Mercado',    icon: '🏪' },
+    location:    { label: 'Tráfico Peatonal',         icon: '📍' },
+    security:    { label: 'Seguridad de Zona',        icon: '🛡️' },
+    growth:      { label: 'Crecimiento Económico',    icon: '📈' },
+    legal:       { label: 'Factibilidad Regulatoria', icon: '⚖️' },
 };
-
 const STATUS_ES = {
-    sufficient: 'Suficiente', marginal: 'Marginal', insufficient: 'Insuficiente',
-    low: 'Baja', medium: 'Media', high: 'Alta', very_high: 'Muy Alta',
-    growing: 'En crecimiento', stable: 'Estable', declining: 'Declive',
-    all_attainable: 'Totalmente alcanzable', some_blockers: 'Con bloqueadores',
-    major_blockers: 'Bloqueadores severos', estimated: 'Estimado',
+    sufficient:'Suficiente', marginal:'Marginal', insufficient:'Insuficiente',
+    low:'Baja', medium:'Media', high:'Alta', very_high:'Muy Alta',
+    growing:'Creciendo', stable:'Estable', declining:'Declive',
+    all_attainable:'Alcanzable', some_blockers:'Con bloqueos', major_blockers:'Bloqueado',
 };
 
-let chartInstance = null;
+let cashChart = null;
 
-document.getElementById('viabilityForm').addEventListener('submit', async (e) => {
+/* ── Form submit ───────────────────────────────────────────────────────────── */
+document.getElementById('viabilityForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const businessType = document.getElementById('businessType').value;
+    const bt = document.getElementById('businessType').value;
     const zone = document.getElementById('zone').value;
-    const budget = parseFloat(document.getElementById('budget').value);
-    const sqm = parseFloat(document.getElementById('sqm').value);
-    const entityType = document.getElementById('entityType').value;
+    if (!bt || !zone) { alert('Selecciona el tipo de negocio y la alcaldía.'); return; }
 
-    if (!businessType || !zone) {
-        alert('Por favor selecciona el tipo de negocio y la alcaldía.');
-        return;
-    }
+    const budget = parseFloat(document.getElementById('budget').value);
+    const sqm    = parseFloat(document.getElementById('sqm').value);
+    const entity = document.getElementById('entityType').value;
 
     document.getElementById('loadingState').style.display = 'block';
     document.getElementById('resultsSection').style.display = 'none';
+    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
 
     try {
         const res = await fetch('/api/viability-check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ business_type: businessType, zone, user_budget_mxn: budget, space_sqm: sqm, entity_type: entityType }),
+            body: JSON.stringify({ business_type: bt, zone, user_budget_mxn: budget, space_sqm: sqm, entity_type: entity }),
         });
-        if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.detail || 'Error en la evaluación');
-        }
+        if (!res.ok) { const e = await res.json(); throw new Error(e.detail || 'Error'); }
         const data = await res.json();
 
-        renderResults(data);
+        render(data);
 
         document.getElementById('loadingState').style.display = 'none';
         document.getElementById('resultsSection').style.display = 'block';
-        document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        setTimeout(() => animateGauge(data.viability_score, data.viability_label), 400);
-
+        setTimeout(() => document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
     } catch (err) {
         document.getElementById('loadingState').style.display = 'none';
         alert('Error: ' + err.message);
     }
 });
 
-function scoreColor(score) {
-    if (score >= 80) return '#16a34a';
-    if (score >= 65) return '#1a3c7b';
-    if (score >= 50) return '#ea580c';
-    return '#dc2626';
+/* ── Helpers ────────────────────────────────────────────────────────────────  */
+const fmt = n => '$' + Math.round(n).toLocaleString('es-MX');
+const scoreColor = s => s >= 80 ? '#1b5e20' : s >= 65 ? '#631135' : s >= 50 ? '#7f3200' : '#7f0000';
+
+function badgeClass(pct) {
+    return pct >= 75 ? 'badge-good' : pct >= 50 ? 'badge-ok' : 'badge-bad';
+}
+function barColor(pct) {
+    return pct >= 75 ? '#16a34a' : pct >= 50 ? '#d97706' : '#dc2626';
 }
 
-function animateGauge(score, label) {
-    const arc = document.getElementById('gaugeArc');
-    const offset = CIRCUMFERENCE * (1 - score / 100);
-    const color = scoreColor(score);
-    arc.style.strokeDashoffset = offset;
-    arc.style.stroke = color;
-    document.getElementById('gaugeScore').textContent = score;
-    document.getElementById('gaugeScore').style.color = color;
-    document.getElementById('gaugeLabel').textContent = label;
-    document.getElementById('gaugeLabel').style.color = color;
+/* ── Main render ───────────────────────────────────────────────────────────── */
+function render(d) {
+    renderBanner(d);
+    renderFactors(d.factors);
+    renderCosts(d.cost_breakdown, d.estimated_monthly_revenue);
+    renderRisks(d.risks, d.recommendation, d.viability_class);
+    renderChart(d.monthly_cashflow);
+    renderZone(d.zone_summary);
+    renderSupport(d.support_resources);
+    renderProcedures(d.procedures_required, d.total_procedure_days, d.total_procedure_cost);
 }
 
-function renderResults(data) {
-    // Reset gauge
-    document.getElementById('gaugeScore').textContent = '—';
-    document.getElementById('gaugeLabel').textContent = '—';
-    document.getElementById('gaugeArc').style.strokeDashoffset = CIRCUMFERENCE;
+/* ── Score banner ──────────────────────────────────────────────────────────── */
+function renderBanner(d) {
+    const s = d.viability_score;
+    const banner = document.getElementById('scoreBanner');
+    banner.className = 'score-banner mb-3 ' + (s >= 80 ? 'alta' : s >= 65 ? 'viable' : s >= 50 ? 'marginal' : 'no');
+    document.getElementById('scoreNum').textContent = s;
+    document.getElementById('scoreLabel').textContent = d.viability_label;
+    document.getElementById('scoreRec').textContent = d.recommendation;
+    document.getElementById('scoreProb').textContent = `Tasa histórica de éxito del giro: ${Math.round(d.success_probability * 100)}%`;
+}
 
-    // Success probability
-    document.getElementById('successProb').textContent = Math.round(data.success_probability * 100) + '%';
-
-    // Recommendation box
-    const score = data.viability_score;
-    const recBox = document.getElementById('recommendationBox');
-    recBox.className = 'rec-box ' + (score >= 80 ? 'rec-alta' : score >= 65 ? 'rec-viable' : score >= 50 ? 'rec-marginal' : 'rec-no');
-    document.getElementById('recommendationText').textContent = data.recommendation;
-
-    // Factors
-    document.getElementById('factorsContainer').innerHTML = Object.entries(data.factors).map(([key, f]) => {
-        const meta = FACTOR_META[key] || { label: key, icon: '•' };
-        const pct = Math.round((f.score / f.max) * 100);
-        const barColor = pct >= 75 ? '#16a34a' : pct >= 50 ? '#f59e0b' : '#dc2626';
-        const statusLabel = STATUS_ES[f.status] || f.status;
+/* ── Factors ───────────────────────────────────────────────────────────────── */
+function renderFactors(factors) {
+    document.getElementById('factorGrid').innerHTML = Object.entries(factors).map(([key, f]) => {
+        const meta = FACTOR_META[key] || { label: key, icon: '·' };
+        const pct  = Math.round((f.score / f.max) * 100);
+        const st   = STATUS_ES[f.status] || f.status;
         return `
-        <div class="factor-row">
-            <span class="factor-icon">${meta.icon}</span>
-            <div class="factor-meta">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span style="font-size:0.85rem;font-weight:600;">${meta.label}</span>
-                    <span class="factor-score-badge">${f.score}/${f.max} · ${statusLabel}</span>
-                </div>
-                <div class="factor-bar-bg">
-                    <div class="factor-bar-fill" style="width:${pct}%;background:${barColor};"></div>
-                </div>
-                <span style="font-size:0.75rem;color:#9ca3af;">${f.details || ''}</span>
+        <div class="factor-card">
+            <div class="f-header">
+                <span class="f-name">${meta.icon} ${meta.label}</span>
+                <span class="f-badge ${badgeClass(pct)}">${st}</span>
+            </div>
+            <div class="factor-bar-bg"><div class="factor-bar-fill" style="width:${pct}%;background:${barColor(pct)};"></div></div>
+            <div class="d-flex justify-content-between mt-1">
+                <span class="factor-detail">${f.details || ''}</span>
+                <span class="factor-score">${f.score}/${f.max}</span>
             </div>
         </div>`;
     }).join('');
+}
 
-    // Costs
-    const c = data.cost_breakdown;
-    const fmt = n => '$' + Math.round(n).toLocaleString('es-MX');
+/* ── Costs ─────────────────────────────────────────────────────────────────── */
+function renderCosts(c, revMonthly) {
+    const bk = c.monthly_fixed_breakdown || {};
+    const costLabels = { rent:'Renta', utilities:'Servicios', permits:'Permisos', insurance:'Seguro', labor_base:'Nómina base', supplies:'Insumos' };
+
+    const breakdown = Object.entries(bk).map(([k, v]) =>
+        `<div class="cost-item"><span class="cost-label cost-sub">${costLabels[k] || k}</span><span class="cost-value cost-sub">${fmt(v)}</span></div>`
+    ).join('');
+
+    const runClass = c.runway_months >= 12 ? 'text-success' : c.runway_months >= 6 ? 'text-warning' : 'text-danger';
+
     document.getElementById('costsContainer').innerHTML = `
-        <div class="cost-row"><span>Trámites de apertura</span><span class="cost-val">${fmt(c.procedures_total)}</span></div>
-        <div class="cost-row"><span>Instalación inicial</span><span class="cost-val">${fmt(c.initial_setup || 0)}</span></div>
-        <div class="cost-row"><span>Costo fijo mensual</span><span class="cost-val">${fmt(c.monthly_fixed)}</span></div>
-        <div class="cost-row"><span style="font-weight:700;">Total primer año</span><span class="cost-val">${fmt(c.first_year_total)}</span></div>
-        <div class="cost-row"><span>Punto de equilibrio</span><span class="cost-val">${c.break_even_months} meses</span></div>
-        <div class="cost-row"><span>Runway con tu capital</span><span class="cost-val ${c.runway_months >= 12 ? 'text-success' : c.runway_months >= 6 ? 'text-warning' : 'text-danger'}">${c.runway_months} meses</span></div>
-        <div class="cost-row"><span>Ingreso mensual estimado</span><span class="cost-val text-success">${fmt(data.estimated_monthly_revenue)}</span></div>
-    `;
+        <div class="cost-section-head">Trámites de apertura</div>
+        <div class="cost-item"><span class="cost-label">Costo en trámites</span><span class="cost-value">${fmt(c.procedure_costs)}</span></div>
+        <div class="cost-item"><span class="cost-label">Instalación inicial</span><span class="cost-value">${fmt(c.initial_setup)}</span></div>
 
-    // Risks
-    document.getElementById('risksContainer').innerHTML = data.risks.map(r => `
-        <div class="d-flex align-items-start gap-2 mb-2">
-            <span class="risk-chip risk-${r.level}">${r.category}</span>
-            <span class="risk-chip risk-${r.level}">${r.level}</span>
-            <span style="font-size:0.82rem;color:#4b5563;margin-top:3px;">${r.detail}</span>
+        <div class="cost-section-head">Costo mensual fijo</div>
+        ${breakdown}
+        <div class="cost-item" style="border-top:2px solid var(--border);margin-top:4px;">
+            <span class="cost-label fw-bold">Total mensual</span>
+            <span class="cost-value">${fmt(c.monthly_fixed)}</span>
+        </div>
+
+        <div class="cost-section-head">Proyección primer año</div>
+        <div class="cost-item"><span class="cost-label fw-bold">Total primer año</span><span class="cost-value">${fmt(c.first_year_total)}</span></div>
+        <div class="cost-item"><span class="cost-label">Punto de equilibrio</span><span class="cost-value">${c.break_even_months} meses</span></div>
+        <div class="cost-item"><span class="cost-label">Runway con tu capital</span><span class="cost-value ${runClass}">${c.runway_months} meses</span></div>
+        <div class="cost-item"><span class="cost-label">Ingreso mensual estimado</span><span class="cost-value text-success">${fmt(revMonthly)}</span></div>
+        <div class="cost-item"><span class="cost-label cost-sub">Renta calculada (${c.space_sqm}m²)</span><span class="cost-value cost-sub">${fmt(c.rental_calculated)}/mes</span></div>
+    `;
+}
+
+/* ── Risks ─────────────────────────────────────────────────────────────────── */
+function renderRisks(risks, rec, cls) {
+    document.getElementById('risksContainer').innerHTML = risks.map(r => `
+        <div class="risk-row">
+            <div class="risk-dot ${r.level}"></div>
+            <div>
+                <div><span class="risk-cat">${r.icon || ''} ${r.category}</span> <span class="risk-lv ${r.level}">${r.level}</span></div>
+                <div class="risk-detail">${r.detail}</div>
+            </div>
         </div>
     `).join('');
 
-    // Cash flow chart
-    if (chartInstance) chartInstance.destroy();
-    const cf = data.monthly_cashflow;
-    const ctx = document.getElementById('cashflowChart').getContext('2d');
-    chartInstance = new Chart(ctx, {
+    const box = document.getElementById('recBox');
+    box.className = 'rec-box mt-3 rec-' + (cls || 'viable');
+    document.getElementById('recText').textContent = rec;
+}
+
+/* ── Cash flow chart ───────────────────────────────────────────────────────── */
+function renderChart(cf) {
+    if (cashChart) cashChart.destroy();
+    cashChart = new Chart(document.getElementById('cashChart').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: cf.map(m => `Mes ${m.month}`),
+            labels: cf.map(m => `M${m.month}`),
             datasets: [
-                {
-                    label: 'Ingresos',
-                    data: cf.map(m => m.revenue),
-                    backgroundColor: 'rgba(22, 163, 74, 0.65)',
-                    borderRadius: 4,
-                    order: 2,
-                },
-                {
-                    label: 'Costos',
-                    data: cf.map(m => m.costs),
-                    backgroundColor: 'rgba(220, 38, 38, 0.65)',
-                    borderRadius: 4,
-                    order: 2,
-                },
-                {
-                    label: 'Saldo Acumulado',
-                    data: cf.map(m => m.cumulative),
-                    type: 'line',
-                    borderColor: '#1a3c7b',
-                    backgroundColor: 'rgba(26,60,123,0.08)',
-                    fill: true,
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.4,
-                    yAxisID: 'y1',
-                    order: 1,
-                },
+                { label: 'Ingresos',  data: cf.map(m => m.revenue), backgroundColor: 'rgba(16,76,66,.65)', borderRadius: 4, order: 2 },
+                { label: 'Costos',    data: cf.map(m => m.costs),   backgroundColor: 'rgba(136,24,91,.55)', borderRadius: 4, order: 2 },
+                { label: 'Saldo acumulado', data: cf.map(m => m.cumulative), type: 'line',
+                  borderColor: '#BC955C', backgroundColor: 'rgba(188,149,92,.08)', fill: true,
+                  borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#BC955C',
+                  tension: 0.4, yAxisID: 'y1', order: 1 },
             ],
         },
         options: {
             responsive: true,
             interaction: { mode: 'index', intersect: false },
             plugins: {
-                legend: { position: 'top' },
-                tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': $' + Math.round(ctx.raw).toLocaleString('es-MX') } },
+                legend: { position: 'top', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.raw)}` } },
             },
             scales: {
-                y: { title: { display: true, text: 'MXN / mes' }, ticks: { callback: v => '$' + v.toLocaleString() } },
-                y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Saldo acumulado' }, ticks: { callback: v => '$' + v.toLocaleString() } },
+                y:  { title: { display: true, text: 'MXN / mes', font:{ size:11} },
+                      ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k', font:{ size:10} } },
+                y1: { position: 'right', grid: { drawOnChartArea: false },
+                      title: { display: true, text: 'Saldo acumulado', font:{size:11} },
+                      ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k', font:{size:10} } },
             },
         },
     });
+}
 
-    // Procedures
-    const totalDays = data.procedures_required.reduce((s, p) => s + p.timeline_days, 0);
-    const totalCost = data.procedures_required.reduce((s, p) => s + p.cost_mxn, 0);
-    document.getElementById('procedureSummary').innerHTML = `
-        <span class="proc-badge py-1 px-3" style="background:#eff6ff;color:#1d4ed8;font-size:0.85rem;">📅 ${totalDays} días calendario totales</span>
-        <span class="proc-badge py-1 px-3" style="background:#eff6ff;color:#1d4ed8;font-size:0.85rem;">💰 $${totalCost.toLocaleString('es-MX')} MXN en trámites</span>
-        <span class="proc-badge py-1 px-3" style="background:#eff6ff;color:#1d4ed8;font-size:0.85rem;">📋 ${data.procedures_required.length} trámites en secuencia</span>
+/* ── Zone profile ──────────────────────────────────────────────────────────── */
+function renderZone(z) {
+    if (!z) { document.getElementById('zoneContainer').innerHTML = '<p class="text-muted small">Sin datos de zona.</p>'; return; }
+    const tags = (z.characteristics || []).map(t => `<span class="zone-tag">${t}</span>`).join('');
+    document.getElementById('zoneContainer').innerHTML = `
+        <div class="fw-bold mb-2" style="font-size:.95rem;">${z.name}</div>
+        <div class="zone-metric"><span class="zm-icon">👥</span><span class="zm-label">Población</span><span class="zm-val">${z.population?.toLocaleString('es-MX')}</span></div>
+        <div class="zone-metric"><span class="zm-icon">🚶</span><span class="zm-label">Tráfico peatonal/día</span><span class="zm-val">${z.characteristics?.foot_traffic?.toLocaleString('es-MX') || '—'}</span></div>
+        <div class="zone-metric"><span class="zm-icon">💰</span><span class="zm-label">Renta/m²/año</span><span class="zm-val">$${z.rental_sqm_annual?.toLocaleString('es-MX')}</span></div>
+        <div class="zone-metric"><span class="zm-icon">🏢</span><span class="zm-label">Tipo de zona</span><span class="zm-val" style="font-size:.75rem;">${z.type?.replace(/_/g,' ')}</span></div>
+        ${tags ? `<div class="mt-2">${tags}</div>` : ''}
+    `;
+}
+
+/* ── Support programs ──────────────────────────────────────────────────────── */
+function renderSupport(sr) {
+    if (!sr) { document.getElementById('supportContainer').innerHTML = ''; return; }
+    const all = [...(sr.constitution || []), ...(sr.support_programs || [])];
+    document.getElementById('supportContainer').innerHTML = `
+        <div class="mb-2">
+            <div class="cost-section-head">Constitución de empresa</div>
+            ${(sr.constitution || []).map(p => `<div class="support-item"><div class="support-bullet"></div><span class="support-text">${p}</span></div>`).join('')}
+        </div>
+        <div>
+            <div class="cost-section-head">Programas disponibles</div>
+            ${(sr.support_programs || []).map(p => `<div class="support-item"><div class="support-bullet"></div><span class="support-text">${p}</span></div>`).join('')}
+        </div>
+        <div class="mt-3 p-2 rounded" style="background:var(--border);font-size:.75rem;color:var(--muted);">
+            Fuente: Cenproin — Centro de Capacitación y Recursos para PYME CDMX
+        </div>
+    `;
+}
+
+/* ── Procedure timeline ────────────────────────────────────────────────────── */
+function renderProcedures(procs, totalDays, totalCost) {
+    // Summary strip
+    document.getElementById('tlStrip').innerHTML = `
+        <span class="tl-chip">📅 ${totalDays} días hábiles totales</span>
+        <span class="tl-chip">💰 ${fmt(totalCost)} en trámites</span>
+        <span class="tl-chip">📋 ${procs.length} trámites en secuencia</span>
+        <span class="tl-chip">⚡ Ruta crítica: RFC → Uso de Suelo → Licencia Municipal</span>
     `;
 
-    document.getElementById('proceduresContainer').innerHTML = data.procedures_required.map(p => `
+    // Track agencies used for legend
+    const agenciesUsed = new Set();
+
+    document.getElementById('procTimeline').innerHTML = procs.map(p => {
+        const ak = agencyKey(p.agency);
+        const al = agencyLabel(p.agency);
+        agenciesUsed.add(ak + '|' + al);
+        const docs = p.documents.length
+            ? `<div class="proc-docs">📄 <strong>Docs:</strong> ${p.documents.join(' · ')}</div>`
+            : '';
+        const dep = p.blocking.length
+            ? `<div class="proc-dep">⛓ Requiere: ${p.blocking.map(b => b.replace(/_/g,' ')).join(', ')}</div>`
+            : '';
+        const cost = p.cost_mxn > 0 ? fmt(p.cost_mxn) : 'Gratuito';
+        return `
         <div class="proc-step">
-            <div class="proc-num">${p.sequence}</div>
-            <div class="proc-body">
-                <div class="proc-name">${p.name}</div>
-                <div class="proc-meta mb-1">${p.description}</div>
-                <div class="d-flex flex-wrap gap-2 align-items-center">
-                    <span class="proc-badge">⏱️ ${p.timeline_days} días</span>
-                    <span class="proc-badge">${p.cost_mxn > 0 ? '💰 $' + p.cost_mxn.toLocaleString('es-MX') : '✅ Gratuito'}</span>
-                    <span class="proc-badge" style="background:#f0fdf4;color:#16a34a;">🏛️ ${p.agency}</span>
+            <div class="proc-dot bg-${ak}">${p.sequence}</div>
+            <div class="proc-card border-${ak}" style="background:var(--bg);">
+                <div class="proc-name ag-${ak}">${p.name}</div>
+                <div class="proc-desc">${p.description}</div>
+                <div>
+                    <span class="proc-pill pill-${ak}">🏛️ ${al}</span>
+                    <span class="proc-pill" style="background:#f3f4f6;color:var(--text);">⏱️ ${p.timeline_days} días</span>
+                    <span class="proc-pill" style="background:#f3f4f6;color:var(--text);">${p.cost_mxn > 0 ? '💰 '+cost : '✅ '+cost}</span>
                 </div>
-                ${p.documents.length ? `<div class="proc-meta mt-1"><strong>Documentos:</strong> ${p.documents.join(' · ')}</div>` : ''}
+                ${docs}${dep}
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
+
+    // Agency legend
+    const legendItems = [...agenciesUsed].map(entry => {
+        const [ak, al] = entry.split('|');
+        return `<span class="proc-pill pill-${ak}">● ${al}</span>`;
+    });
+    document.getElementById('agencyLegend').innerHTML =
+        `<span style="font-size:.72rem;font-weight:700;color:var(--muted);align-self:center;">Dependencias:</span>` +
+        legendItems.join('');
 }
 </script>
-
 </body>
 </html>
