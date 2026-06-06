@@ -1,0 +1,34 @@
+{
+  "metadata": {"description": "Fast lookup indices for sub-millisecond queries"},
+  "indices": {
+    "business_by_type": {
+      "722110": "restaurante",
+      "722210": "cafeteria",
+      "461110": "tienda_abarrotes",
+      "461210": "tienda_ropa",
+      "465910": "farmacia",
+      "812930": "salon_belleza",
+      "551020": "oficina",
+      "711120": "galeria_arte",
+      "721110": "hotel"
+    },
+    "procedures_by_category": {
+      "food_service": ["sanitario", "siapem", "registro_mercantil", "licencia_municipal", "uso_de_suelo"],
+      "retail": ["registro_mercantil", "licencia_municipal", "uso_de_suelo"],
+      "professional": ["registro_mercantil", "licencia_municipal", "rfc_business"],
+      "hospitality": ["registro_mercantil", "licencia_municipal", "uso_de_suelo", "siapem", "sanitario"]
+    },
+    "zones_by_type": {
+      "commercial": ["cuauhtemoc", "benito_juarez", "miguel_hidalgo"],
+      "residential": ["coyoacan", "alvaro_obregon"],
+      "industrial": ["gustavo_madero", "iztacalco", "azcapotzalco"],
+      "emerging": ["tlahuac", "la_paz", "villa_gustavo_madero"],
+      "mixed": ["iztapalapa", "venustiano_carranza"]
+    },
+    "procedure_timeline": {
+      "quick": ["rfc_business", "registro_mercantil"],
+      "medium": ["licencia_municipal", "uso_de_suelo", "registro_trabajadores"],
+      "long": ["siapem", "sanitario"]
+    }
+  }
+}

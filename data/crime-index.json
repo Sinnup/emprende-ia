@@ -1,0 +1,31 @@
+{
+  "metadata": {"source": "INEGI + CDMX Secretaría de Seguridad", "scale": "0-100, higher=worse"},
+  "crime_by_zone": {
+    "cuauhtemoc": {"robbery": 70, "theft": 65, "assault": 60, "vandalism": 50, "overall": 65},
+    "benito_juarez": {"robbery": 45, "theft": 40, "assault": 35, "vandalism": 30, "overall": 45},
+    "coyoacan": {"robbery": 55, "theft": 50, "assault": 50, "vandalism": 40, "overall": 55},
+    "gustavo_madero": {"robbery": 80, "theft": 75, "assault": 70, "vandalism": 65, "overall": 75},
+    "iztapalapa": {"robbery": 85, "theft": 80, "assault": 75, "vandalism": 70, "overall": 80},
+    "miguel_hidalgo": {"robbery": 35, "theft": 30, "assault": 25, "vandalism": 20, "overall": 40},
+    "alcaldia_venustiano_carranza": {"robbery": 70, "theft": 65, "assault": 60, "vandalism": 50, "overall": 70},
+    "alcaldia_iztacalco": {"robbery": 75, "theft": 70, "assault": 65, "vandalism": 55, "overall": 72},
+    "alcaldia_tlahuac": {"robbery": 65, "theft": 60, "assault": 55, "vandalism": 45, "overall": 68},
+    "alcaldia_xochimilco": {"robbery": 60, "theft": 55, "assault": 50, "vandalism": 40, "overall": 62},
+    "alcaldia_milpa_alta": {"robbery": 50, "theft": 45, "assault": 40, "vandalism": 35, "overall": 50},
+    "alcaldia_magdalena_contreras": {"robbery": 55, "theft": 50, "assault": 50, "vandalism": 40, "overall": 60},
+    "alcaldia_alvaro_obregon": {"robbery": 50, "theft": 45, "assault": 40, "vandalism": 35, "overall": 55},
+    "alcaldia_azcapotzalco": {"robbery": 70, "theft": 65, "assault": 60, "vandalism": 50, "overall": 70},
+    "alcaldia_la_paz": {"robbery": 65, "theft": 60, "assault": 55, "vandalism": 45, "overall": 65},
+    "alcaldia_villa_gustavo_madero": {"robbery": 70, "theft": 65, "assault": 60, "vandalism": 50, "overall": 68}
+  },
+  "crime_by_business_type": {
+    "722110": {"risk_category": "Medium-High", "primary_risk": "Robbery, Assault", "seasonal_risk": "Higher during tourist season"},
+    "722210": {"risk_category": "Medium", "primary_risk": "Robbery", "seasonal_risk": "Normal"},
+    "461110": {"risk_category": "High", "primary_risk": "Theft, Robbery", "seasonal_risk": "Normal"},
+    "461210": {"risk_category": "High", "primary_risk": "Theft", "seasonal_risk": "Higher during holidays"},
+    "465910": {"risk_category": "Very High", "primary_risk": "Robbery (drugs)", "seasonal_risk": "Consistent"},
+    "812930": {"risk_category": "Low", "primary_risk": "Theft", "seasonal_risk": "Normal"},
+    "551020": {"risk_category": "Low", "primary_risk": "None", "seasonal_risk": "Very low"},
+    "721110": {"risk_category": "Medium", "primary_risk": "Robbery, Theft", "seasonal_risk": "Higher during peak season"}
+  }
+}

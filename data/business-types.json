@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "source": "INEGI SCIAN",
+    "last_updated": "2026-06-06",
+    "count": 10
+  },
+  "business_types": {
+    "722110": {"name_es": "Restaurante de servicio completo", "category": "Food", "startup_capital": 150000, "monthly_fixed": 4000, "variable_ratio": 0.35, "success_rate": 0.65, "procedures_days": 45},
+    "722210": {"name_es": "Cafetería", "category": "Food", "startup_capital": 80000, "monthly_fixed": 2500, "variable_ratio": 0.40, "success_rate": 0.70, "procedures_days": 30},
+    "461110": {"name_es": "Tienda de abarrotes", "category": "Retail", "startup_capital": 120000, "monthly_fixed": 2500, "variable_ratio": 0.25, "success_rate": 0.68, "procedures_days": 25},
+    "461210": {"name_es": "Tienda de ropa", "category": "Retail", "startup_capital": 150000, "monthly_fixed": 3000, "variable_ratio": 0.35, "success_rate": 0.62, "procedures_days": 20},
+    "465910": {"name_es": "Farmacia", "category": "Retail", "startup_capital": 200000, "monthly_fixed": 3500, "variable_ratio": 0.30, "success_rate": 0.75, "procedures_days": 60},
+    "812930": {"name_es": "Salón de belleza", "category": "Services", "startup_capital": 80000, "monthly_fixed": 2000, "variable_ratio": 0.20, "success_rate": 0.72, "procedures_days": 20},
+    "551020": {"name_es": "Oficina profesional", "category": "Professional", "startup_capital": 60000, "monthly_fixed": 1500, "variable_ratio": 0.15, "success_rate": 0.80, "procedures_days": 30},
+    "711120": {"name_es": "Galería de arte", "category": "Arts", "startup_capital": 200000, "monthly_fixed": 3000, "variable_ratio": 0.10, "success_rate": 0.55, "procedures_days": 25},
+    "721110": {"name_es": "Hotel", "category": "Hospitality", "startup_capital": 2000000, "monthly_fixed": 20000, "variable_ratio": 0.40, "success_rate": 0.60, "procedures_days": 90}
+  }
+}

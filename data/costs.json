@@ -1,0 +1,82 @@
+{
+  "metadata": {"source": "RETYS + industry averages", "currency": "MXN"},
+  "costs": {
+    "722110": {
+      "name": "Restaurante de servicio completo",
+      "procedure_costs": 5100,
+      "monthly_fixed": {"rent": 4000, "utilities": 500, "permits": 200, "insurance": 400, "labor_base": 1500, "supplies": 300},
+      "monthly_fixed_total": 6900,
+      "variable_cost_ratio": 0.35,
+      "initial_setup": 15000,
+      "first_year_total": 82800,
+      "break_even_months": 6,
+      "estimated_revenue_monthly": 15000
+    },
+    "722210": {
+      "name": "Cafetería",
+      "procedure_costs": 4000,
+      "monthly_fixed": {"rent": 2500, "utilities": 300, "permits": 150, "insurance": 300, "labor_base": 1200, "supplies": 200},
+      "monthly_fixed_total": 4650,
+      "variable_cost_ratio": 0.40,
+      "initial_setup": 8000,
+      "first_year_total": 55800,
+      "break_even_months": 4,
+      "estimated_revenue_monthly": 10000
+    },
+    "461110": {
+      "name": "Tienda de abarrotes",
+      "procedure_costs": 2500,
+      "monthly_fixed": {"rent": 2500, "utilities": 250, "permits": 100, "insurance": 300, "labor_base": 800, "supplies": 150},
+      "monthly_fixed_total": 4100,
+      "variable_cost_ratio": 0.25,
+      "initial_setup": 20000,
+      "first_year_total": 49200,
+      "break_even_months": 8,
+      "estimated_revenue_monthly": 12000
+    },
+    "461210": {
+      "name": "Tienda de ropa",
+      "procedure_costs": 2000,
+      "monthly_fixed": {"rent": 3000, "utilities": 200, "permits": 100, "insurance": 250, "labor_base": 800, "supplies": 200},
+      "monthly_fixed_total": 4550,
+      "variable_cost_ratio": 0.35,
+      "initial_setup": 30000,
+      "first_year_total": 54600,
+      "break_even_months": 9,
+      "estimated_revenue_monthly": 13000
+    },
+    "465910": {
+      "name": "Farmacia",
+      "procedure_costs": 3500,
+      "monthly_fixed": {"rent": 3500, "utilities": 300, "permits": 150, "insurance": 400, "labor_base": 1500, "supplies": 250},
+      "monthly_fixed_total": 6100,
+      "variable_cost_ratio": 0.30,
+      "initial_setup": 40000,
+      "first_year_total": 73200,
+      "break_even_months": 7,
+      "estimated_revenue_monthly": 18000
+    },
+    "812930": {
+      "name": "Salón de belleza",
+      "procedure_costs": 2000,
+      "monthly_fixed": {"rent": 2000, "utilities": 250, "permits": 100, "insurance": 300, "labor_base": 1200, "supplies": 300},
+      "monthly_fixed_total": 4150,
+      "variable_cost_ratio": 0.20,
+      "initial_setup": 8000,
+      "first_year_total": 49800,
+      "break_even_months": 5,
+      "estimated_revenue_monthly": 9000
+    },
+    "551020": {
+      "name": "Oficina profesional",
+      "procedure_costs": 1500,
+      "monthly_fixed": {"rent": 1500, "utilities": 150, "permits": 50, "insurance": 200, "labor_base": 1000, "supplies": 100},
+      "monthly_fixed_total": 3000,
+      "variable_cost_ratio": 0.15,
+      "initial_setup": 5000,
+      "first_year_total": 36000,
+      "break_even_months": 3,
+      "estimated_revenue_monthly": 8000
+    }
+  }
+}
