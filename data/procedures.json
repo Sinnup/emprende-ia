@@ -1,5 +1,10 @@
 {
-  "metadata": {"source": "RETYS + Ley de Establecimientos", "procedures": 8},
+  "metadata": {
+    "source": "RETYS + Ley de Establecimientos",
+    "procedures": 8,
+    "updated": "2026-06-06",
+    "additional_procedures_added": 2
+  },
   "procedures": {
     "registro_mercantil": {
       "code": "TRM001",
@@ -7,9 +12,15 @@
       "description": "Register business with CDMX Commerce Registry",
       "timeline_days": 3,
       "cost_mxn": 500,
-      "required_documents": ["Acta constitutiva or RFC", "ID", "Proof of address"],
+      "required_documents": [
+        "Acta constitutiva or RFC",
+        "ID",
+        "Proof of address"
+      ],
       "agency": "Cámara de Comercio CDMX",
-      "applicable_to": ["all"],
+      "applicable_to": [
+        "all"
+      ],
       "priority": 1,
       "blocking": []
     },
@@ -19,11 +30,20 @@
       "description": "Municipal License for Commercial Establishment",
       "timeline_days": 5,
       "cost_mxn": 800,
-      "required_documents": ["Registro Mercantil", "Proof of location", "Building plan", "Insurance"],
+      "required_documents": [
+        "Registro Mercantil",
+        "Proof of location",
+        "Building plan",
+        "Insurance"
+      ],
       "agency": "Delegación - Ventanilla Única",
-      "applicable_to": ["all"],
+      "applicable_to": [
+        "all"
+      ],
       "priority": 2,
-      "blocking": ["registro_mercantil"]
+      "blocking": [
+        "registro_mercantil"
+      ]
     },
     "uso_de_suelo": {
       "code": "TRM003",
@@ -31,9 +51,15 @@
       "description": "Land Use Compatibility Certificate",
       "timeline_days": 10,
       "cost_mxn": 600,
-      "required_documents": ["Property address", "Building plan", "Zoning request"],
+      "required_documents": [
+        "Property address",
+        "Building plan",
+        "Zoning request"
+      ],
       "agency": "SEDUVI",
-      "applicable_to": ["all"],
+      "applicable_to": [
+        "all"
+      ],
       "priority": 1,
       "blocking": []
     },
@@ -43,11 +69,22 @@
       "description": "Environmental Permit for Commercial Activity",
       "timeline_days": 20,
       "cost_mxn": 2000,
-      "required_documents": ["Environmental Impact Assessment", "Uso de suelo", "Building specifications"],
+      "required_documents": [
+        "Environmental Impact Assessment",
+        "Uso de suelo",
+        "Building specifications"
+      ],
       "agency": "SIAPEM - SEDEMA",
-      "applicable_to": ["722110", "722210", "restaurants", "food_processing"],
+      "applicable_to": [
+        "722110",
+        "722210",
+        "restaurants",
+        "food_processing"
+      ],
       "priority": 2,
-      "blocking": ["uso_de_suelo"]
+      "blocking": [
+        "uso_de_suelo"
+      ]
     },
     "sanitario": {
       "code": "TRM005",
@@ -55,11 +92,22 @@
       "description": "Health Permit for Food Establishment",
       "timeline_days": 10,
       "cost_mxn": 1200,
-      "required_documents": ["Floor plan", "Equipment list", "Staff qualifications", "SIAPEM clearance"],
+      "required_documents": [
+        "Floor plan",
+        "Equipment list",
+        "Staff qualifications",
+        "SIAPEM clearance"
+      ],
       "agency": "Secretaría de Salud CDMX",
-      "applicable_to": ["722110", "722210", "food_service"],
+      "applicable_to": [
+        "722110",
+        "722210",
+        "food_service"
+      ],
       "priority": 3,
-      "blocking": ["siapem"]
+      "blocking": [
+        "siapem"
+      ]
     },
     "registro_trabajadores": {
       "code": "TRM006",
@@ -67,11 +115,19 @@
       "description": "Register employees with IMSS (Mexican Social Security)",
       "timeline_days": 5,
       "cost_mxn": 300,
-      "required_documents": ["Employee list", "RFC", "Payroll plan"],
+      "required_documents": [
+        "Employee list",
+        "RFC",
+        "Payroll plan"
+      ],
       "agency": "IMSS",
-      "applicable_to": ["all_with_employees"],
+      "applicable_to": [
+        "all_with_employees"
+      ],
       "priority": 3,
-      "blocking": ["licencia_municipal"]
+      "blocking": [
+        "licencia_municipal"
+      ]
     },
     "rfc_business": {
       "code": "TRM007",
@@ -79,9 +135,15 @@
       "description": "Federal Tax ID Registration",
       "timeline_days": 1,
       "cost_mxn": 0,
-      "required_documents": ["ID", "Proof of address", "Constitutive act"],
+      "required_documents": [
+        "ID",
+        "Proof of address",
+        "Constitutive act"
+      ],
       "agency": "SAT (Servicio de Administración Tributaria)",
-      "applicable_to": ["all"],
+      "applicable_to": [
+        "all"
+      ],
       "priority": 1,
       "blocking": []
     },
@@ -91,11 +153,56 @@
       "description": "Liability Insurance Policy",
       "timeline_days": 2,
       "cost_mxn": 1500,
-      "required_documents": ["Building info", "Equipment list", "Business plan"],
+      "required_documents": [
+        "Building info",
+        "Equipment list",
+        "Business plan"
+      ],
       "agency": "Insurance Company",
-      "applicable_to": ["all"],
+      "applicable_to": [
+        "all"
+      ],
       "priority": 2,
-      "blocking": ["licencia_municipal"]
+      "blocking": [
+        "licencia_municipal"
+      ]
+    },
+    "registro_uso_de_suelo_adicional": {
+      "code": "TRM009",
+      "name_es": "Registro de Cambio de Actividad (si aplica)",
+      "description": "Notificar cambio de actividad al Municipio",
+      "timeline_days": 5,
+      "cost_mxn": 500,
+      "required_documents": [
+        "Nuevo plano",
+        "Licencia anterior",
+        "Justificación"
+      ],
+      "agency": "Ventanilla Única",
+      "applicable_to": [
+        "all"
+      ],
+      "priority": 4,
+      "blocking": [
+        "licencia_municipal"
+      ]
+    },
+    "alineamiento_construccion": {
+      "code": "TRM010",
+      "name_es": "Alineamiento y Número Oficial",
+      "description": "Obtener alineamiento y número oficial de dirección",
+      "timeline_days": 3,
+      "cost_mxn": 200,
+      "required_documents": [
+        "Identificación",
+        "Comprobante propiedad"
+      ],
+      "agency": "Dirección de Catastro",
+      "applicable_to": [
+        "all"
+      ],
+      "priority": 1,
+      "blocking": []
     }
   },
   "procedure_sequences": {
