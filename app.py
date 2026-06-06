@@ -207,6 +207,14 @@ def calculate(btype, zone_key, budget, sqm):
     elif budget >= fy * 0.8:  bs, bst = m["budget"]["scoring"]["marginal"],     "Marginal"
     else:                      bs, bst = m["budget"]["scoring"]["insufficient"], "Insuficiente"
 
+    # ENHANCEMENT: Space Adequacy Penalty
+    space_penalty = 1.0
+    if sqm < 50:    space_penalty = 0.80   # Too small: -20%
+    elif sqm < 60:  space_penalty = 0.85   # Small: -15%
+    elif sqm > 300: space_penalty = 0.70   # Too large: -30%
+    elif sqm > 200: space_penalty = 0.80   # Large: -20%
+    bs = round(bs * space_penalty)
+
     dens = z["business_density_per_10k"]
     if dens < 20:    cs, cst = m["competition"]["scoring"]["low"],       "Baja"
     elif dens < 50:  cs, cst = m["competition"]["scoring"]["medium"],    "Media"
