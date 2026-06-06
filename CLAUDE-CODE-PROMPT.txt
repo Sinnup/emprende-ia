@@ -1,0 +1,26 @@
+You are building SEDECO Reto 2: Business Viability Assessment Tool for CDMX.
+
+IMMEDIATE TASK: Implement Streamlit MVP (Task #11)
+
+READ THIS FIRST:
+- File: .claude/TASK-MVP-STREAMLIT.md (contains complete plan + full code)
+- File: .claude/CLAUDE-CODE-START-HERE.md (quick reference)
+
+YOUR TASK:
+1. Create app.py in project root (SEDECO/) with the COMPLETE CODE from TASK-MVP-STREAMLIT.md
+2. Install dependencies: pip install streamlit anthropic
+3. Set environment: export ANTHROPIC_API_KEY="sk-ant-YOUR-KEY"
+4. Test: streamlit run app.py
+
+CRITICAL REQUIREMENTS:
+- Real Claude API must be called (anthropic.Anthropic()) for recommendations
+- 🇲🇽 ALL UI TEXT MUST BE IN SPANISH (form labels, buttons, results, errors, everything visible)
+- Internal code (comments, variables) can be English
+- All procedures must be from .claude/data/procedures.json (Spanish names)
+- Claude responses must be in Spanish
+
+RESULT: Single app.py that passes Gate 1 + scores 5/5 on all 3 criteria
+
+TIME: 30 mins | DEADLINE: 17:00
+
+Start now.

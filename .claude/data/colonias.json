@@ -1,0 +1,143 @@
+{
+  "Cuauhtémoc": {
+    "colonias": [
+      {"name": "Centro", "lat": 19.4326, "lon": -99.1332, "foot_traffic_daily": 50000, "rental_cost_sqm_annual": 1500, "crime_index": 65, "population": 45000},
+      {"name": "Roma Norte", "lat": 19.4270, "lon": -99.1570, "foot_traffic_daily": 35000, "rental_cost_sqm_annual": 1200, "crime_index": 55, "population": 38000},
+      {"name": "Juárez", "lat": 19.4350, "lon": -99.1400, "foot_traffic_daily": 45000, "rental_cost_sqm_annual": 1400, "crime_index": 60, "population": 42000},
+      {"name": "Doctores", "lat": 19.4410, "lon": -99.1200, "foot_traffic_daily": 25000, "rental_cost_sqm_annual": 900, "crime_index": 70, "population": 35000},
+      {"name": "Guerrero", "lat": 19.4480, "lon": -99.1350, "foot_traffic_daily": 30000, "rental_cost_sqm_annual": 950, "crime_index": 75, "population": 40000},
+      {"name": "San Rafael", "lat": 19.4290, "lon": -99.1480, "foot_traffic_daily": 28000, "rental_cost_sqm_annual": 1050, "crime_index": 68, "population": 36000}
+    ]
+  },
+  "Miguel Hidalgo": {
+    "colonias": [
+      {"name": "Polanco", "lat": 19.4430, "lon": -99.1580, "foot_traffic_daily": 40000, "rental_cost_sqm_annual": 1800, "crime_index": 40, "population": 32000},
+      {"name": "Anzures", "lat": 19.4450, "lon": -99.1620, "foot_traffic_daily": 35000, "rental_cost_sqm_annual": 1600, "crime_index": 42, "population": 28000},
+      {"name": "Chapultepec", "lat": 19.4410, "lon": -99.1750, "foot_traffic_daily": 32000, "rental_cost_sqm_annual": 1550, "crime_index": 45, "population": 25000},
+      {"name": "Lomas", "lat": 19.4400, "lon": -99.1900, "foot_traffic_daily": 28000, "rental_cost_sqm_annual": 1700, "crime_index": 38, "population": 22000},
+      {"name": "Hipódromo", "lat": 19.4380, "lon": -99.1680, "foot_traffic_daily": 33000, "rental_cost_sqm_annual": 1500, "crime_index": 43, "population": 26000}
+    ]
+  },
+  "Benito Juárez": {
+    "colonias": [
+      {"name": "Narvarte", "lat": 19.4200, "lon": -99.1650, "foot_traffic_daily": 38000, "rental_cost_sqm_annual": 1350, "crime_index": 50, "population": 41000},
+      {"name": "Del Valle", "lat": 19.4180, "lon": -99.1750, "foot_traffic_daily": 35000, "rental_cost_sqm_annual": 1280, "crime_index": 48, "population": 39000},
+      {"name": "La Noria", "lat": 19.4250, "lon": -99.1550, "foot_traffic_daily": 32000, "rental_cost_sqm_annual": 1200, "crime_index": 52, "population": 36000},
+      {"name": "Santa Fe", "lat": 19.4100, "lon": -99.2100, "foot_traffic_daily": 25000, "rental_cost_sqm_annual": 1100, "crime_index": 45, "population": 28000},
+      {"name": "Insurgentes", "lat": 19.4150, "lon": -99.1850, "foot_traffic_daily": 30000, "rental_cost_sqm_annual": 1150, "crime_index": 50, "population": 34000}
+    ]
+  },
+  "Coyoacán": {
+    "colonias": [
+      {"name": "Coyoacán", "lat": 19.3850, "lon": -99.1620, "foot_traffic_daily": 28000, "rental_cost_sqm_annual": 1100, "crime_index": 48, "population": 32000},
+      {"name": "Xoco", "lat": 19.3900, "lon": -99.1650, "foot_traffic_daily": 24000, "rental_cost_sqm_annual": 1000, "crime_index": 52, "population": 28000},
+      {"name": "Pedregal", "lat": 19.3950, "lon": -99.1900, "foot_traffic_daily": 22000, "rental_cost_sqm_annual": 1300, "crime_index": 40, "population": 25000},
+      {"name": "Copilco", "lat": 19.3800, "lon": -99.1750, "foot_traffic_daily": 26000, "rental_cost_sqm_annual": 1050, "crime_index": 45, "population": 30000}
+    ]
+  },
+  "Iztapalapa": {
+    "colonias": [
+      {"name": "Iztapalapa", "lat": 19.3600, "lon": -99.0900, "foot_traffic_daily": 20000, "rental_cost_sqm_annual": 700, "crime_index": 80, "population": 50000},
+      {"name": "Leyes de Reforma", "lat": 19.3620, "lon": -99.0880, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 680, "crime_index": 82, "population": 48000},
+      {"name": "Santa Martha", "lat": 19.3680, "lon": -99.0920, "foot_traffic_daily": 19000, "rental_cost_sqm_annual": 720, "crime_index": 78, "population": 45000},
+      {"name": "Reforma", "lat": 19.3550, "lon": -99.0850, "foot_traffic_daily": 17000, "rental_cost_sqm_annual": 650, "crime_index": 85, "population": 55000},
+      {"name": "Ampliación", "lat": 19.3700, "lon": -99.0950, "foot_traffic_daily": 21000, "rental_cost_sqm_annual": 750, "crime_index": 75, "population": 52000}
+    ]
+  },
+  "Cuajimalpa": {
+    "colonias": [
+      {"name": "Cuajimalpa", "lat": 19.3650, "lon": -99.2550, "foot_traffic_daily": 15000, "rental_cost_sqm_annual": 1100, "crime_index": 35, "population": 20000},
+      {"name": "Centro Comercial", "lat": 19.3700, "lon": -99.2600, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 1200, "crime_index": 32, "population": 18000},
+      {"name": "Fincas", "lat": 19.3750, "lon": -99.2700, "foot_traffic_daily": 12000, "rental_cost_sqm_annual": 950, "crime_index": 38, "population": 16000},
+      {"name": "San Pedro", "lat": 19.3600, "lon": -99.2700, "foot_traffic_daily": 13000, "rental_cost_sqm_annual": 1000, "crime_index": 36, "population": 17000}
+    ]
+  },
+  "Álvaro Obregón": {
+    "colonias": [
+      {"name": "San Ángel", "lat": 19.3540, "lon": -99.1900, "foot_traffic_daily": 26000, "rental_cost_sqm_annual": 1250, "crime_index": 42, "population": 30000},
+      {"name": "Tizapán", "lat": 19.3650, "lon": -99.1950, "foot_traffic_daily": 22000, "rental_cost_sqm_annual": 1100, "crime_index": 45, "population": 28000},
+      {"name": "Toriello Guerra", "lat": 19.3580, "lon": -99.2050, "foot_traffic_daily": 20000, "rental_cost_sqm_annual": 1150, "crime_index": 44, "population": 26000},
+      {"name": "Tetelpan", "lat": 19.3700, "lon": -99.2100, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 1050, "crime_index": 48, "population": 24000},
+      {"name": "Barrio San Ángel", "lat": 19.3480, "lon": -99.1800, "foot_traffic_daily": 24000, "rental_cost_sqm_annual": 1200, "crime_index": 46, "population": 29000}
+    ]
+  },
+  "Venustiano Carranza": {
+    "colonias": [
+      {"name": "Centro", "lat": 19.4150, "lon": -99.0850, "foot_traffic_daily": 28000, "rental_cost_sqm_annual": 900, "crime_index": 72, "population": 42000},
+      {"name": "Pensil", "lat": 19.4200, "lon": -99.0900, "foot_traffic_daily": 22000, "rental_cost_sqm_annual": 800, "crime_index": 75, "population": 38000},
+      {"name": "Peñalosa", "lat": 19.4250, "lon": -99.0800, "foot_traffic_daily": 20000, "rental_cost_sqm_annual": 780, "crime_index": 78, "population": 40000},
+      {"name": "Morelos", "lat": 19.4100, "lon": -99.0950, "foot_traffic_daily": 25000, "rental_cost_sqm_annual": 850, "crime_index": 76, "population": 45000},
+      {"name": "Anáhuac", "lat": 19.4300, "lon": -99.0750, "foot_traffic_daily": 23000, "rental_cost_sqm_annual": 820, "crime_index": 74, "population": 41000}
+    ]
+  },
+  "Gustavo A. Madero": {
+    "colonias": [
+      {"name": "Centro", "lat": 19.4820, "lon": -99.1350, "foot_traffic_daily": 24000, "rental_cost_sqm_annual": 820, "crime_index": 78, "population": 48000},
+      {"name": "Vallejo", "lat": 19.4900, "lon": -99.1200, "foot_traffic_daily": 20000, "rental_cost_sqm_annual": 750, "crime_index": 82, "population": 45000},
+      {"name": "Atlampa", "lat": 19.4750, "lon": -99.1450, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 700, "crime_index": 85, "population": 42000},
+      {"name": "San Rafael", "lat": 19.4650, "lon": -99.1300, "foot_traffic_daily": 22000, "rental_cost_sqm_annual": 800, "crime_index": 80, "population": 44000},
+      {"name": "Fortuna", "lat": 19.4850, "lon": -99.1500, "foot_traffic_daily": 19000, "rental_cost_sqm_annual": 780, "crime_index": 83, "population": 46000}
+    ]
+  },
+  "Azcapotzalco": {
+    "colonias": [
+      {"name": "Azcapotzalco", "lat": 19.4950, "lon": -99.1750, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 750, "crime_index": 76, "population": 40000},
+      {"name": "San Bartolo", "lat": 19.5000, "lon": -99.1850, "foot_traffic_daily": 16000, "rental_cost_sqm_annual": 700, "crime_index": 80, "population": 38000},
+      {"name": "Lomas de Sotelo", "lat": 19.4900, "lon": -99.1950, "foot_traffic_daily": 14000, "rental_cost_sqm_annual": 680, "crime_index": 78, "population": 35000},
+      {"name": "Hermosa", "lat": 19.5050, "lon": -99.1700, "foot_traffic_daily": 17000, "rental_cost_sqm_annual": 720, "crime_index": 77, "population": 39000}
+    ]
+  },
+  "La Magdalena Contreras": {
+    "colonias": [
+      {"name": "La Magdalena", "lat": 19.3200, "lon": -99.2200, "foot_traffic_daily": 12000, "rental_cost_sqm_annual": 850, "crime_index": 38, "population": 18000},
+      {"name": "Magdalena", "lat": 19.3250, "lon": -99.2300, "foot_traffic_daily": 11000, "rental_cost_sqm_annual": 820, "crime_index": 40, "population": 16000},
+      {"name": "Los Pinos", "lat": 19.3150, "lon": -99.2100, "foot_traffic_daily": 10000, "rental_cost_sqm_annual": 800, "crime_index": 42, "population": 15000}
+    ]
+  },
+  "Xochimilco": {
+    "colonias": [
+      {"name": "Xochimilco", "lat": 19.2850, "lon": -99.1100, "foot_traffic_daily": 15000, "rental_cost_sqm_annual": 700, "crime_index": 52, "population": 22000},
+      {"name": "Centro", "lat": 19.2900, "lon": -99.1150, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 750, "crime_index": 50, "population": 24000},
+      {"name": "San Gregorio", "lat": 19.2950, "lon": -99.0950, "foot_traffic_daily": 13000, "rental_cost_sqm_annual": 680, "crime_index": 55, "population": 20000},
+      {"name": "Nativitas", "lat": 19.2800, "lon": -99.1250, "foot_traffic_daily": 14000, "rental_cost_sqm_annual": 690, "crime_index": 54, "population": 21000},
+      {"name": "Tepepan", "lat": 19.2750, "lon": -99.1200, "foot_traffic_daily": 12000, "rental_cost_sqm_annual": 650, "crime_index": 58, "population": 19000}
+    ]
+  },
+  "Tláhuac": {
+    "colonias": [
+      {"name": "Tláhuac", "lat": 19.2650, "lon": -99.0800, "foot_traffic_daily": 12000, "rental_cost_sqm_annual": 650, "crime_index": 68, "population": 30000},
+      {"name": "Zapotitlán", "lat": 19.2700, "lon": -99.0850, "foot_traffic_daily": 10000, "rental_cost_sqm_annual": 620, "crime_index": 72, "population": 28000},
+      {"name": "Tecomitl", "lat": 19.2750, "lon": -99.0750, "foot_traffic_daily": 11000, "rental_cost_sqm_annual": 640, "crime_index": 70, "population": 29000},
+      {"name": "Reyes de Paz", "lat": 19.2600, "lon": -99.0950, "foot_traffic_daily": 9000, "rental_cost_sqm_annual": 600, "crime_index": 75, "population": 27000}
+    ]
+  },
+  "Milpa Alta": {
+    "colonias": [
+      {"name": "Milpa Alta", "lat": 19.2300, "lon": -99.0600, "foot_traffic_daily": 8000, "rental_cost_sqm_annual": 550, "crime_index": 45, "population": 12000},
+      {"name": "Centro", "lat": 19.2350, "lon": -99.0650, "foot_traffic_daily": 9000, "rental_cost_sqm_annual": 600, "crime_index": 42, "population": 14000},
+      {"name": "San Antonio", "lat": 19.2250, "lon": -99.0550, "foot_traffic_daily": 7000, "rental_cost_sqm_annual": 520, "crime_index": 48, "population": 11000}
+    ]
+  },
+  "Iztacalco": {
+    "colonias": [
+      {"name": "Iztacalco", "lat": 19.3750, "lon": -99.0650, "foot_traffic_daily": 22000, "rental_cost_sqm_annual": 800, "crime_index": 74, "population": 42000},
+      {"name": "Juan de Aragón", "lat": 19.3800, "lon": -99.0700, "foot_traffic_daily": 20000, "rental_cost_sqm_annual": 780, "crime_index": 76, "population": 40000},
+      {"name": "Ojo de Agua", "lat": 19.3700, "lon": -99.0600, "foot_traffic_daily": 18000, "rental_cost_sqm_annual": 760, "crime_index": 78, "population": 38000},
+      {"name": "Santa Rosa", "lat": 19.3850, "lon": -99.0750, "foot_traffic_daily": 21000, "rental_cost_sqm_annual": 810, "crime_index": 75, "population": 41000}
+    ]
+  },
+  "Tlámpan": {
+    "colonias": [
+      {"name": "Tlámpan", "lat": 19.2500, "lon": -99.1650, "foot_traffic_daily": 10000, "rental_cost_sqm_annual": 650, "crime_index": 55, "population": 16000},
+      {"name": "Tlaltenco", "lat": 19.2550, "lon": -99.1700, "foot_traffic_daily": 9000, "rental_cost_sqm_annual": 620, "crime_index": 58, "population": 15000},
+      {"name": "San Andrés", "lat": 19.2450, "lon": -99.1600, "foot_traffic_daily": 8500, "rental_cost_sqm_annual": 600, "crime_index": 60, "population": 14000}
+    ]
+  },
+  "Chimalhuacán": {
+    "colonias": [
+      {"name": "Centro", "lat": 19.3350, "lon": -99.0200, "foot_traffic_daily": 11000, "rental_cost_sqm_annual": 600, "crime_index": 70, "population": 28000},
+      {"name": "San Juan", "lat": 19.3400, "lon": -99.0250, "foot_traffic_daily": 10000, "rental_cost_sqm_annual": 580, "crime_index": 72, "population": 26000},
+      {"name": "Ampliación", "lat": 19.3300, "lon": -99.0150, "foot_traffic_daily": 9500, "rental_cost_sqm_annual": 570, "crime_index": 74, "population": 25000}
+    ]
+  }
+}

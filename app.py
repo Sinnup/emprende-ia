@@ -135,6 +135,7 @@ def load_data():
         "crime":          json.loads((d / "crime-index.json").read_text()),
         "model":          json.loads((d / "viability-model.json").read_text()),
         "competitors":    json.loads((d / "competitors.json").read_text()),
+        "colonias":       json.loads((d / "colonias.json").read_text()),
     }
 
 @st.cache_resource
@@ -176,20 +177,33 @@ def agency_key(agency):
 def bar_color(pct):
     return "#16a34a" if pct >= 75 else "#d97706" if pct >= 50 else "#dc2626"
 
+def haversine_km(lat1, lon1, lat2, lon2):
+    import math
+    R = 6371
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    return R * 2 * math.asin(math.sqrt(a))
+
 def get_sequence(btype):
     food, office = {"722110", "722210"}, {"551020"}
     seqs = DATA["procedures"]["procedure_sequences"]
     return seqs["restaurant"] if btype in food else seqs["oficina"] if btype in office else seqs["tienda_retail"]
 
 # ── Scoring ───────────────────────────────────────────────────────────────────
-def calculate(btype, zone_key, budget, sqm):
+def calculate(btype, zone_key, budget, sqm, colonia_data=None):
     bt    = DATA["business_types"][btype]
     z     = DATA["zones"][zone_key]
     costs = DATA["costs"].get(btype)
     crime = DATA["crime"]["crime_by_zone"].get(zone_key, {})
     m     = DATA["model"]["factors"]
 
-    rental_monthly = round(z["rental_cost_sqm_annual"] * sqm / 12)
+    # Override zone-level metrics with colonia-specific data if available
+    rental_sqm_annual = colonia_data["rental_cost_sqm_annual"] if colonia_data else z["rental_cost_sqm_annual"]
+    foot_traffic_val  = colonia_data["foot_traffic_daily"]      if colonia_data else z["foot_traffic_daily"]
+    crime_index_val   = colonia_data["crime_index"]             if colonia_data else crime.get("overall", 50)
+
+    rental_monthly = round(rental_sqm_annual * sqm / 12)
 
     if costs:
         bkdown = dict(costs["monthly_fixed"])
@@ -222,12 +236,12 @@ def calculate(btype, zone_key, budget, sqm):
     elif dens < 100: cs, cst = m["competition"]["scoring"]["high"],      "Alta"
     else:            cs, cst = m["competition"]["scoring"]["very_high"], "Muy Alta"
 
-    ft = z["foot_traffic_daily"]
+    ft = foot_traffic_val
     if ft > 5000:   ls, lst = m["location"]["scoring"]["high"],   "Alto"
     elif ft > 2000: ls, lst = m["location"]["scoring"]["medium"], "Medio"
     else:           ls, lst = m["location"]["scoring"]["low"],    "Bajo"
 
-    ci = crime.get("overall", 50)
+    ci = crime_index_val
     if ci < 40:   ss, sst = m["security"]["scoring"]["low"],    "Bajo"
     elif ci < 70: ss, sst = m["security"]["scoring"]["medium"], "Medio"
     else:         ss, sst = m["security"]["scoring"]["high"],   "Alto"
@@ -273,6 +287,7 @@ def calculate(btype, zone_key, budget, sqm):
                   "revenue_monthly": rev, "rental_monthly": rental_monthly, "sqm": sqm},
         "procedures": procs, "tdays": tdays, "tcost": tcost,
         "zone": z, "cashflow": cf,
+        "colonia": colonia_data,
     }
 
 # ── Hero ──────────────────────────────────────────────────────────────────────
@@ -291,6 +306,17 @@ with col1:
     st.markdown("#### 🏢 Negocio y zona")
     btype    = st.selectbox("Giro SCIAN", list(BTYPE_OPTS), format_func=lambda k: BTYPE_OPTS[k])
     zone_key = st.selectbox("Alcaldía",   list(ZONE_OPTS),  format_func=lambda k: ZONE_OPTS[k])
+
+    # Colonia selector — filtered by zone, resets when zone changes
+    _zone_name     = ZONE_OPTS[zone_key]
+    _colonias_list = DATA["colonias"].get(_zone_name, {}).get("colonias", [])
+    _colonia_opts  = ["— Alcaldía completa —"] + [c["name"] for c in _colonias_list]
+    colonia_label  = st.selectbox(
+        "Colonia", options=_colonia_opts,
+        key=f"colonia_{zone_key}",
+        help="Datos específicos por colonia: renta, tráfico y criminalidad más precisos"
+    )
+    colonia_data = next((c for c in _colonias_list if c["name"] == colonia_label), None)
 with col2:
     st.markdown("#### 💰 Recursos")
     budget = st.number_input("Capital disponible (MXN)", value=200_000, step=10_000, min_value=10_000, format="%d")
@@ -303,15 +329,16 @@ go = st.button("🔍 Evaluar Viabilidad del Negocio", use_container_width=True, 
 # ── On button click: compute R immediately and cache (Claude called later) ─────
 if go:
     with st.spinner("Calculando con datos del RETYS y SEDUVI…"):
-        R = calculate(btype, zone_key, budget, sqm)
-    st.session_state["R"]            = R
-    st.session_state["claude_text"]  = None   # filled below, after results shown
-    st.session_state["claude_error"] = None
-    st.session_state["needs_claude"] = True
-    st.session_state["entity"]       = entity
-    st.session_state["btype"]        = btype
-    st.session_state["zone_key"]     = zone_key
-    st.session_state["budget"]       = budget
+        R = calculate(btype, zone_key, budget, sqm, colonia_data)
+    st.session_state["R"]             = R
+    st.session_state["claude_text"]   = None
+    st.session_state["claude_error"]  = None
+    st.session_state["needs_claude"]  = True
+    st.session_state["entity"]        = entity
+    st.session_state["btype"]         = btype
+    st.session_state["zone_key"]      = zone_key
+    st.session_state["budget"]        = budget
+    st.session_state["colonia_label"] = colonia_label
 
 # ── Guard: nothing computed yet ───────────────────────────────────────────────
 if "R" not in st.session_state:
@@ -379,13 +406,39 @@ with cc:
     st.markdown(costs_card, unsafe_allow_html=True)
 
 # ── Cash flow chart ───────────────────────────────────────────────────────────
-import pandas as pd
-cf_df = pd.DataFrame(R["cashflow"]).set_index("Mes")
+import plotly.graph_objects as go
+
+cf   = R["cashflow"]
+meses    = [f"Mes {m['Mes']}" for m in cf]
+ingresos = [m["Ingresos"]   for m in cf]
+costos   = [m["Costos"]     for m in cf]
+utilidad = [m["Ingresos"] - m["Costos"] for m in cf]
+
+fig = go.Figure()
+fig.add_bar(name="Ingresos", x=meses, y=ingresos,
+            marker_color="#104C42", opacity=0.85)
+fig.add_bar(name="Costos",   x=meses, y=costos,
+            marker_color="#88185B", opacity=0.85)
+fig.add_scatter(name="Utilidad neta / mes", x=meses, y=utilidad,
+                mode="lines+markers",
+                line=dict(color="#BC955C", width=2.5),
+                marker=dict(size=6, color="#BC955C"))
+
+fig.update_layout(
+    barmode="group",
+    plot_bgcolor="white",
+    paper_bgcolor="white",
+    legend=dict(orientation="h", y=1.12, x=0),
+    yaxis=dict(title="MXN", tickformat="$,.0f", gridcolor="#f0f0f0"),
+    xaxis=dict(tickfont=dict(size=11)),
+    margin=dict(l=10, r=10, t=40, b=10),
+    height=360,
+)
+fig.add_hline(y=0, line_width=1, line_dash="dot", line_color="#aaa")
 
 with st.container(border=True):
     st.markdown("**📈 Proyección financiera — 12 meses**")
-    st.bar_chart(cf_df[["Ingresos", "Costos"]], color=["#104C42", "#88185B"])
-    st.line_chart(cf_df[["Saldo acumulado"]], color=["#BC955C"])
+    st.plotly_chart(fig, use_container_width=True)
 
 # ── Zone card + Procedure roadmap ─────────────────────────────────────────────
 zc, pc_col = st.columns([2, 3], gap="large")
@@ -515,11 +568,24 @@ try:
     import folium
     from streamlit_folium import st_folium
 
-    zone_name       = DATA["zones"][zone_key]["name"]          # "Cuauhtémoc"
+    zone_name            = DATA["zones"][zone_key]["name"]
     competitors_for_type = DATA["competitors"].get(btype, {})
-    zone_competitors = competitors_for_type.get(zone_name, [])
+    all_zone_comps       = competitors_for_type.get(zone_name, [])
+    colonia_info         = R.get("colonia")
+    colonia_lbl          = st.session_state.get("colonia_label", "— Alcaldía completa —")
 
-    lat, lon = ZONE_COORDS.get(zone_key, (19.4326, -99.1332))
+    # Centre map and filter competitors to colonia if selected
+    if colonia_info:
+        lat, lon = colonia_info["lat"], colonia_info["lon"]
+        zone_competitors = [
+            c for c in all_zone_comps
+            if haversine_km(lat, lon, c["lat"], c["lon"]) <= 1.5
+        ]
+        map_title = f"{zone_name} · {colonia_lbl}"
+    else:
+        lat, lon = ZONE_COORDS.get(zone_key, (19.4326, -99.1332))
+        zone_competitors = all_zone_comps
+        map_title = zone_name
 
     fmap = folium.Map(location=[lat, lon], zoom_start=14, tiles="OpenStreetMap")
 
@@ -555,10 +621,11 @@ try:
             st.metric("Reseñas totales", f"{sum(c['reviews'] for c in zone_competitors):,}")
             high = len([c for c in zone_competitors if c["rating"] >= 4.5])
             st.metric("Bien calificados (≥4.5)", f"{high} ({100*high//len(zone_competitors)}%)")
-        st.info(f"📊 {len(zone_competitors)} competidores directos encontrados en {zone_name}")
+        st.info(f"📊 {len(zone_competitors)} competidores directos en {map_title}" +
+                (" (radio 1.5 km)" if colonia_info else ""))
     else:
         st_folium(fmap, width=700, height=400)
-        st.info(f"📍 Sin datos de competidores directos para {zone_name} — muestra la zona en el mapa")
+        st.info(f"📍 Sin datos de competidores directos para {map_title}")
 
 except ImportError:
     st.warning("⚠️ Para ver el mapa instala: pip install folium streamlit-folium")
