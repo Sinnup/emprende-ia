@@ -7,23 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        /* ── Brand tokens ─────────────────────────────────────────────────── */
         :root {
-            --teal:        #104C42;
-            --teal-mid:    #235B4E;
-            --magenta:     #88185B;
-            --magenta-dk:  #631135;
-            --lavender:    #9482A3;
-            --gold:        #BC955C;
-            --bg:          #F5F0F3;
-            --card:        #ffffff;
-            --border:      #EDE0E8;
-            --text:        #1f2937;
-            --muted:       #6b7280;
-        }
-
-        /* ── Agency colour map ────────────────────────────────────────────── */
-        :root {
+            --teal:       #104C42;
+            --teal-mid:   #235B4E;
+            --magenta:    #88185B;
+            --magenta-dk: #631135;
+            --gold:       #BC955C;
+            --bg:         #F5F0F3;
+            --card:       #ffffff;
+            --border:     #EDE0E8;
+            --text:       #1f2937;
+            --muted:      #6b7280;
+            /* agencies */
             --sat:        #1565C0;
             --comercio:   #6A1B9A;
             --seduvi:     #2E7D32;
@@ -33,217 +28,211 @@
             --imss:       #1B5E20;
             --seguro:     #37474F;
         }
-
-        /* ── Base ─────────────────────────────────────────────────────────── */
         * { box-sizing: border-box; }
         body { background: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); margin: 0; }
 
-        /* ── Nav ──────────────────────────────────────────────────────────── */
+        /* Nav */
         .top-nav { background: var(--teal); padding: .75rem 0; }
         .top-nav .brand { color: #fff; font-size: 1.15rem; font-weight: 800; text-decoration: none; }
-        .top-nav .subtitle { color: rgba(255,255,255,.65); font-size: .8rem; }
 
-        /* ── Hero ─────────────────────────────────────────────────────────── */
+        /* Hero */
         .hero { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%); color: #fff; padding: 3rem 0 5.5rem; }
-        .hero h1 { font-size: 2.1rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
-        .hero .lead { opacity: .88; max-width: 580px; font-size: 1rem; }
-        .hero-badge { display: inline-block; background: rgba(188,149,92,.28); color: var(--gold); border-radius: 20px; padding: 4px 14px; font-size: .8rem; font-weight: 600; }
+        .hero h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: .9rem; }
+        .hero .lead { opacity: .88; max-width: 560px; font-size: .97rem; }
+        .hero-badge { display: inline-block; background: rgba(188,149,92,.28); color: var(--gold); border-radius: 20px; padding: 4px 14px; font-size: .78rem; font-weight: 600; }
 
-        /* ── Form card ────────────────────────────────────────────────────── */
+        /* Form card */
         .form-card { background: var(--card); border-radius: 20px; padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,.16); margin-top: -4rem; }
-        .form-card .card-title { color: var(--teal); font-weight: 700; font-size: 1rem; margin-bottom: 1.25rem; }
-        .btn-submit {
-            background: var(--magenta); color: #fff; border: none;
-            border-radius: 12px; font-weight: 700; font-size: 1rem;
-            padding: .75rem 1.5rem; width: 100%; transition: .2s;
-        }
-        .btn-submit:hover { background: var(--magenta-dk); color: #fff; transform: translateY(-1px); }
-        .form-select, .form-control { border-color: var(--border); }
+        .form-card .card-title { color: var(--teal); font-weight: 700; font-size: .97rem; margin-bottom: 1.2rem; }
+        .btn-submit { background: var(--magenta); color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; padding: .75rem 1.5rem; width: 100%; transition: .2s; }
+        .btn-submit:hover { background: var(--magenta-dk); transform: translateY(-1px); }
+        .btn-submit:disabled { opacity: .65; transform: none; cursor: not-allowed; }
         .form-select:focus, .form-control:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(136,24,91,.12); }
+        .form-select.is-invalid, .form-control.is-invalid { border-color: #dc2626; }
 
-        /* ── Loading ──────────────────────────────────────────────────────── */
+        /* Error banner */
+        #errorBanner { display: none; border-radius: 12px; background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; padding: .85rem 1rem; font-size: .88rem; }
+
+        /* Loading */
         #loadingState { display: none; }
         .spinner-ring { width: 2.5rem; height: 2.5rem; border: 3px solid var(--border); border-top-color: var(--magenta); border-radius: 50%; animation: spin .7s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Results ──────────────────────────────────────────────────────── */
+        /* Results */
         #resultsSection { display: none; }
-        .results-card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 3px 16px rgba(0,0,0,.07); height: 100%; }
+        .results-card { background: var(--card); border-radius: 16px; padding: 1.5rem; box-shadow: 0 3px 16px rgba(0,0,0,.07); }
         .section-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--magenta); margin-bottom: 1rem; }
 
-        /* ── Score hero banner ────────────────────────────────────────────── */
-        .score-banner { border-radius: 20px; padding: 2rem; color: #fff; margin-bottom: 1.25rem; }
-        .score-banner.alta    { background: linear-gradient(135deg,#1b5e20,#2e7d32); }
-        .score-banner.viable  { background: linear-gradient(135deg,var(--magenta-dk),var(--magenta)); }
-        .score-banner.marginal{ background: linear-gradient(135deg,#7f3200,#e65100); }
-        .score-banner.no      { background: linear-gradient(135deg,#7f0000,#c62828); }
-        .score-number { font-size: 5rem; font-weight: 900; line-height: 1; }
-        .score-label  { font-size: 1.4rem; font-weight: 700; opacity: .95; }
-        .score-rec    { font-size: .92rem; opacity: .85; margin-top: .5rem; }
-        .score-prob   { font-size: .8rem; opacity: .75; margin-top: .75rem; }
+        /* Score banner */
+        .score-banner { border-radius: 20px; padding: 1.75rem 2rem; color: #fff; margin-bottom: 1.25rem; }
+        .score-banner.alta     { background: linear-gradient(135deg,#14532d,#16a34a); }
+        .score-banner.viable   { background: linear-gradient(135deg,var(--magenta-dk),var(--magenta)); }
+        .score-banner.marginal { background: linear-gradient(135deg,#7c2d12,#ea580c); }
+        .score-banner.no       { background: linear-gradient(135deg,#7f1d1d,#dc2626); }
+        .score-number { font-size: 4.5rem; font-weight: 900; line-height: 1; }
+        .score-label  { font-size: 1.3rem; font-weight: 700; }
+        .score-rec    { font-size: .9rem; opacity: .85; margin-top: .4rem; }
+        .score-meta   { font-size: .78rem; opacity: .7; margin-top: .6rem; }
 
-        /* ── Factor cards ─────────────────────────────────────────────────── */
+        /* Factor cards */
         .factor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+        @media (max-width:576px) { .factor-grid { grid-template-columns: 1fr; } }
         .factor-card { background: var(--bg); border-radius: 12px; padding: .9rem 1rem; }
-        .factor-card .f-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .5rem; }
-        .factor-card .f-name { font-size: .82rem; font-weight: 700; }
-        .factor-card .f-badge { font-size: .7rem; font-weight: 700; border-radius: 8px; padding: 2px 8px; }
-        .badge-good    { background: #d1fae5; color: #065f46; }
-        .badge-ok      { background: #fef3c7; color: #92400e; }
-        .badge-bad     { background: #fee2e2; color: #991b1b; }
-        .factor-bar-bg { height: 6px; border-radius: 3px; background: #e5e7eb; overflow: hidden; margin-bottom: .3rem; }
-        .factor-bar-fill { height: 100%; border-radius: 3px; transition: width .9s cubic-bezier(.4,0,.2,1); }
-        .factor-score { font-size: .75rem; font-weight: 700; color: var(--muted); }
-        .factor-detail { font-size: .72rem; color: var(--muted); }
+        .f-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .45rem; }
+        .f-name { font-size: .82rem; font-weight: 700; }
+        .f-badge { font-size: .68rem; font-weight: 700; border-radius: 8px; padding: 2px 8px; }
+        .badge-good { background: #d1fae5; color: #065f46; }
+        .badge-ok   { background: #fef3c7; color: #92400e; }
+        .badge-bad  { background: #fee2e2; color: #991b1b; }
+        .factor-bar-bg   { height: 6px; border-radius: 3px; background: #e5e7eb; overflow: hidden; margin-bottom: .3rem; }
+        .factor-bar-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(.4,0,.2,1); }
+        .factor-footer { display: flex; justify-content: space-between; }
+        .factor-detail { font-size: .71rem; color: var(--muted); }
 
-        /* ── Cost table ───────────────────────────────────────────────────── */
-        .cost-item { display: flex; justify-content: space-between; align-items: center; padding: .4rem 0; border-bottom: 1px solid var(--border); }
+        /* Costs */
+        .cost-sec-head { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--magenta); margin: .8rem 0 .2rem; }
+        .cost-item { display: flex; justify-content: space-between; align-items: center; padding: .38rem 0; border-bottom: 1px solid var(--border); }
         .cost-item:last-child { border: none; }
-        .cost-label { font-size: .85rem; color: var(--text); }
-        .cost-value { font-size: .85rem; font-weight: 700; }
+        .cost-label { font-size: .83rem; }
+        .cost-value { font-size: .83rem; font-weight: 700; }
         .cost-sub { font-size: .75rem; color: var(--muted); }
-        .cost-section-head { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--magenta); margin: .75rem 0 .25rem; }
 
-        /* ── Risk rows ────────────────────────────────────────────────────── */
-        .risk-row { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .7rem; }
-        .risk-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+        /* Risks */
+        .risk-row { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: .7rem; }
+        .risk-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
         .risk-dot.Alto  { background: #dc2626; }
         .risk-dot.Medio { background: #d97706; }
         .risk-dot.Bajo  { background: #16a34a; }
-        .risk-cat  { font-size: .78rem; font-weight: 700; }
-        .risk-lv   { font-size: .72rem; border-radius: 8px; padding: 1px 8px; font-weight: 600; display: inline-block; }
+        .risk-body { flex: 1; }
+        .risk-cat  { font-size: .8rem; font-weight: 700; }
+        .risk-lv   { font-size: .7rem; border-radius: 8px; padding: 1px 8px; font-weight: 600; display: inline-block; margin-left: 4px; }
         .risk-lv.Alto  { background: #fee2e2; color: #991b1b; }
         .risk-lv.Medio { background: #fef3c7; color: #92400e; }
         .risk-lv.Bajo  { background: #d1fae5; color: #065f46; }
         .risk-detail { font-size: .78rem; color: var(--muted); }
 
-        /* ── Recommendation box ───────────────────────────────────────────── */
+        /* Rec box */
         .rec-box { border-radius: 12px; padding: 1rem 1.1rem; border-left: 4px solid; margin-top: 1rem; }
-        .rec-alta    { background: #f0fdf4; border-color: #16a34a; }
-        .rec-viable  { background: #fdf0f6; border-color: var(--magenta); }
-        .rec-marginal{ background: #fff7ed; border-color: #ea580c; }
-        .rec-no      { background: #fef2f2; border-color: #dc2626; }
+        .rec-alta     { background: #f0fdf4; border-color: #16a34a; }
+        .rec-viable   { background: #fdf0f6; border-color: var(--magenta); }
+        .rec-marginal { background: #fff7ed; border-color: #ea580c; }
+        .rec-no       { background: #fef2f2; border-color: #dc2626; }
 
-        /* ── Zone card ────────────────────────────────────────────────────── */
-        .zone-metric { display: flex; align-items: center; gap: .5rem; padding: .45rem 0; border-bottom: 1px solid var(--border); }
-        .zone-metric:last-child { border: none; }
-        .zone-metric .zm-icon { font-size: 1rem; width: 22px; text-align: center; }
-        .zone-metric .zm-label { font-size: .8rem; color: var(--muted); flex: 1; }
-        .zone-metric .zm-val { font-size: .82rem; font-weight: 700; }
-        .zone-tag { display: inline-block; background: var(--border); color: var(--teal); border-radius: 20px; padding: 2px 10px; font-size: .72rem; font-weight: 600; margin: 2px; }
+        /* Zone */
+        .zone-metric { display: flex; align-items: center; gap: .5rem; padding: .42rem 0; border-bottom: 1px solid var(--border); }
+        .zone-metric:last-of-type { border: none; }
+        .zm-icon  { font-size: .95rem; width: 22px; text-align: center; }
+        .zm-label { font-size: .8rem; color: var(--muted); flex: 1; }
+        .zm-val   { font-size: .82rem; font-weight: 700; }
+        .zone-tag { display: inline-block; background: var(--border); color: var(--teal); border-radius: 20px; padding: 2px 10px; font-size: .7rem; font-weight: 600; margin: 2px; }
 
-        /* ── Support programs ─────────────────────────────────────────────── */
-        .support-item { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .5rem; }
+        /* Support */
+        .support-item { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .45rem; }
         .support-bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
-        .support-text { font-size: .82rem; color: var(--text); }
+        .support-text { font-size: .81rem; }
+        .support-source { font-size: .72rem; color: var(--muted); background: var(--border); border-radius: 8px; padding: 4px 10px; margin-top: .75rem; display: inline-block; }
 
-        /* ── Procedure timeline ───────────────────────────────────────────── */
+        /* Procedure timeline */
         .proc-timeline { position: relative; }
-        .proc-timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: var(--border); z-index: 0; }
-        .proc-step { display: flex; gap: 1rem; margin-bottom: 1.1rem; position: relative; z-index: 1; }
-        .proc-dot {
-            flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: .85rem; color: #fff;
-            border: 3px solid var(--bg);
-            box-shadow: 0 0 0 2px currentColor;
-        }
-        .proc-card { flex: 1; background: var(--bg); border-radius: 12px; padding: .85rem 1rem; border-left: 3px solid; }
-        .proc-name { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-        .proc-desc { font-size: .78rem; color: var(--muted); margin-bottom: .4rem; }
-        .proc-pill { display: inline-flex; align-items: center; gap: 3px; border-radius: 20px; padding: 2px 10px; font-size: .72rem; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
-        .proc-docs { font-size: .75rem; color: var(--muted); margin-top: .4rem; }
-        .proc-dep { font-size: .72rem; color: var(--muted); margin-top: .2rem; font-style: italic; }
+        .proc-timeline::before { content:''; position:absolute; left:17px; top:0; bottom:0; width:2px; background:var(--border); z-index:0; }
+        .proc-step  { display:flex; gap:1rem; margin-bottom:1rem; position:relative; z-index:1; }
+        .proc-dot   { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.82rem; color:#fff; border:3px solid var(--bg); }
+        .proc-card  { flex:1; background:var(--bg); border-radius:12px; padding:.8rem 1rem; border-left:3px solid; }
+        .proc-name  { font-size:.88rem; font-weight:700; margin-bottom:.15rem; }
+        .proc-desc  { font-size:.76rem; color:var(--muted); margin-bottom:.4rem; }
+        .proc-pill  { display:inline-flex; align-items:center; gap:3px; border-radius:20px; padding:2px 9px; font-size:.7rem; font-weight:600; margin:0 3px 4px 0; }
+        .proc-docs  { font-size:.73rem; color:var(--muted); margin-top:.35rem; }
+        .proc-dep   { font-size:.7rem; color:var(--muted); margin-top:.2rem; font-style:italic; }
+        .tl-strip   { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+        .tl-chip    { border-radius:20px; padding:4px 14px; font-size:.76rem; font-weight:600; background:var(--border); color:var(--teal); }
+        #agencyLegend { border-top:1px solid var(--border); padding-top:.75rem; margin-top:.5rem; }
 
         /* Agency colours */
-        .ag-sat        { color: var(--sat); }
-        .ag-comercio   { color: var(--comercio); }
-        .ag-seduvi     { color: var(--seduvi); }
-        .ag-ventanilla { color: var(--ventanilla); }
-        .ag-sedema     { color: var(--sedema); }
-        .ag-salud      { color: var(--salud); }
-        .ag-imss       { color: var(--imss); }
-        .ag-seguro     { color: var(--seguro); }
-        .border-sat        { border-color: var(--sat) !important; }
-        .border-comercio   { border-color: var(--comercio) !important; }
-        .border-seduvi     { border-color: var(--seduvi) !important; }
-        .border-ventanilla { border-color: var(--ventanilla) !important; }
-        .border-sedema     { border-color: var(--sedema) !important; }
-        .border-salud      { border-color: var(--salud) !important; }
-        .border-imss       { border-color: var(--imss) !important; }
-        .border-seguro     { border-color: var(--seguro) !important; }
-        .bg-sat        { background: var(--sat) !important; }
-        .bg-comercio   { background: var(--comercio) !important; }
-        .bg-seduvi     { background: var(--seduvi) !important; }
-        .bg-ventanilla { background: var(--ventanilla) !important; }
-        .bg-sedema     { background: var(--sedema) !important; }
-        .bg-salud      { background: var(--salud) !important; }
-        .bg-imss       { background: var(--imss) !important; }
-        .bg-seguro     { background: var(--seguro) !important; }
+        .dot-sat        { background:var(--sat); }
+        .dot-comercio   { background:var(--comercio); }
+        .dot-seduvi     { background:var(--seduvi); }
+        .dot-ventanilla { background:var(--ventanilla); }
+        .dot-sedema     { background:var(--sedema); }
+        .dot-salud      { background:var(--salud); }
+        .dot-imss       { background:var(--imss); }
+        .dot-seguro     { background:var(--seguro); }
 
-        /* Agency pill backgrounds (light) */
-        .pill-sat        { background: #e3f2fd; color: var(--sat); }
-        .pill-comercio   { background: #f3e5f5; color: var(--comercio); }
-        .pill-seduvi     { background: #e8f5e9; color: var(--seduvi); }
-        .pill-ventanilla { background: #fff3e0; color: var(--ventanilla); }
-        .pill-sedema     { background: #e0f2f1; color: var(--sedema); }
-        .pill-salud      { background: #ffebee; color: var(--salud); }
-        .pill-imss       { background: #e8f5e9; color: var(--imss); }
-        .pill-seguro     { background: #eceff1; color: var(--seguro); }
+        .card-sat        { border-color:var(--sat)!important; }
+        .card-comercio   { border-color:var(--comercio)!important; }
+        .card-seduvi     { border-color:var(--seduvi)!important; }
+        .card-ventanilla { border-color:var(--ventanilla)!important; }
+        .card-sedema     { border-color:var(--sedema)!important; }
+        .card-salud      { border-color:var(--salud)!important; }
+        .card-imss       { border-color:var(--imss)!important; }
+        .card-seguro     { border-color:var(--seguro)!important; }
 
-        /* ── Chart container ──────────────────────────────────────────────── */
-        .chart-wrap { position: relative; }
+        .txt-sat        { color:var(--sat); }
+        .txt-comercio   { color:var(--comercio); }
+        .txt-seduvi     { color:var(--seduvi); }
+        .txt-ventanilla { color:var(--ventanilla); }
+        .txt-sedema     { color:var(--sedema); }
+        .txt-salud      { color:var(--salud); }
+        .txt-imss       { color:var(--imss); }
+        .txt-seguro     { color:var(--seguro); }
 
-        /* ── Timeline summary strip ───────────────────────────────────────── */
-        .timeline-strip { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
-        .tl-chip { border-radius: 20px; padding: 4px 14px; font-size: .78rem; font-weight: 600; background: var(--border); color: var(--teal); }
+        .pill-sat        { background:#e3f2fd; color:var(--sat); }
+        .pill-comercio   { background:#f3e5f5; color:var(--comercio); }
+        .pill-seduvi     { background:#e8f5e9; color:var(--seduvi); }
+        .pill-ventanilla { background:#fff3e0; color:var(--ventanilla); }
+        .pill-sedema     { background:#e0f2f1; color:var(--sedema); }
+        .pill-salud      { background:#ffebee; color:var(--salud); }
+        .pill-imss       { background:#e8f5e9; color:var(--imss); }
+        .pill-seguro     { background:#eceff1; color:var(--seguro); }
 
-        /* ── Footer ───────────────────────────────────────────────────────── */
-        .footer { background: var(--teal); color: rgba(255,255,255,.72); padding: 1rem 0; font-size: .78rem; margin-top: 3rem; }
+        /* Nueva consulta btn */
+        .btn-nueva { background:transparent; border:2px solid rgba(255,255,255,.5); color:#fff; border-radius:10px; font-size:.82rem; font-weight:600; padding:.35rem 1rem; transition:.2s; }
+        .btn-nueva:hover { background:rgba(255,255,255,.15); color:#fff; }
 
-        /* ── Responsive ───────────────────────────────────────────────────── */
-        @media (max-width: 576px) {
-            .factor-grid { grid-template-columns: 1fr; }
-            .score-number { font-size: 3.5rem; }
-        }
+        /* Footer */
+        .footer { background:var(--teal); color:rgba(255,255,255,.72); padding:1rem 0; font-size:.78rem; margin-top:3rem; }
     </style>
 </head>
 <body>
 
-<!-- ── Navbar ──────────────────────────────────────────────────────────────── -->
-<div class="top-nav">
+<!-- Nav -->
+<nav class="top-nav">
     <div class="container d-flex justify-content-between align-items-center">
-        <a href="#" class="brand">🏙️ ViabilidadMX</a>
-        <span class="subtitle d-none d-md-inline">SEDECO Ciudad de México · SecretarIA Hackathon 2026</span>
+        <a href="/" class="brand">🏙️ ViabilidadMX</a>
+        <span style="color:rgba(255,255,255,.6);font-size:.8rem;" class="d-none d-md-inline">SEDECO Ciudad de México · SecretarIA Hackathon 2026</span>
     </div>
-</div>
+</nav>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<!-- Hero -->
 <div class="hero">
     <div class="container">
         <div class="col-lg-7">
             <h1>¿Es viable tu negocio<br>en Ciudad de México?</h1>
-            <p class="lead">Evalúa en segundos la viabilidad de tu establecimiento, los trámites requeridos y los costos de apertura — basado en datos reales del RETYS y la Ley de Establecimientos Mercantiles.</p>
+            <p class="lead">Evalúa en segundos la viabilidad, los trámites requeridos y el costo de apertura de tu establecimiento — basado en datos reales del RETYS y la Ley de Establecimientos Mercantiles 2024.</p>
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <span class="hero-badge">📊 9 giros SCIAN</span>
                 <span class="hero-badge">🗺️ 16 alcaldías CDMX</span>
                 <span class="hero-badge">⚖️ RETYS + Ley 2024</span>
+                <span class="hero-badge">⚡ Respuesta &lt;100ms</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ── Form ────────────────────────────────────────────────────────────────── -->
+<!-- Form -->
 <div class="container pb-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="form-card">
                 <div class="card-title">Ingresa los datos de tu negocio</div>
+
+                <!-- Error banner -->
+                <div id="errorBanner" class="mb-3" role="alert"></div>
+
                 <form id="viabilityForm" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold">Tipo de negocio (SCIAN)</label>
-                            <select class="form-select" id="businessType" required>
+                            <label class="form-label small fw-semibold" for="businessType">Tipo de negocio (giro SCIAN)</label>
+                            <select class="form-select" id="businessType" aria-label="Tipo de negocio" required>
                                 <option value="">Selecciona un giro...</option>
                                 <option value="722110">🍽️ Restaurante de servicio completo</option>
                                 <option value="722210">☕ Cafetería</option>
@@ -255,10 +244,11 @@
                                 <option value="711120">🎨 Galería de arte</option>
                                 <option value="721110">🏨 Hotel</option>
                             </select>
+                            <div class="invalid-feedback">Selecciona el tipo de negocio.</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label small fw-semibold">Alcaldía</label>
-                            <select class="form-select" id="zone" required>
+                            <label class="form-label small fw-semibold" for="zone">Alcaldía</label>
+                            <select class="form-select" id="zone" aria-label="Alcaldía" required>
                                 <option value="">Selecciona una alcaldía...</option>
                                 <option value="cuauhtemoc">Cuauhtémoc (Centro Histórico)</option>
                                 <option value="benito_juarez">Benito Juárez (Narvarte / Del Valle)</option>
@@ -277,30 +267,33 @@
                                 <option value="alcaldia_la_paz">La Paz</option>
                                 <option value="alcaldia_villa_gustavo_madero">Villa Gustavo A. Madero</option>
                             </select>
+                            <div class="invalid-feedback">Selecciona la alcaldía.</div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label small fw-semibold">Capital disponible (MXN)</label>
+                            <label class="form-label small fw-semibold" for="budget">Capital disponible (MXN)</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input type="number" class="form-control" id="budget" value="200000" min="1000" step="5000" required>
+                                <input type="number" class="form-control" id="budget" value="200000" min="1000" step="5000" aria-label="Capital en MXN" required>
                             </div>
+                            <div class="invalid-feedback">Ingresa un capital mayor a $1,000.</div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label small fw-semibold">Superficie del local</label>
+                            <label class="form-label small fw-semibold" for="sqm">Superficie del local</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="sqm" value="80" min="5" max="9999" step="5" required>
+                                <input type="number" class="form-control" id="sqm" value="80" min="5" max="9999" step="5" aria-label="Superficie en metros cuadrados" required>
                                 <span class="input-group-text">m²</span>
                             </div>
+                            <div class="invalid-feedback">Superficie entre 5 y 9,999 m².</div>
                         </div>
                         <div class="col-sm-4">
-                            <label class="form-label small fw-semibold">Tipo de persona</label>
-                            <select class="form-select" id="entityType">
+                            <label class="form-label small fw-semibold" for="entityType">Tipo de persona</label>
+                            <select class="form-select" id="entityType" aria-label="Tipo de persona jurídica">
                                 <option value="individual">Persona Física</option>
                                 <option value="moral">Persona Moral (S.A. / S. de R.L.)</option>
                             </select>
                         </div>
                         <div class="col-12 mt-1">
-                            <button type="submit" class="btn-submit">
+                            <button type="submit" class="btn-submit" id="submitBtn">
                                 🔍 Evaluar Viabilidad del Negocio
                             </button>
                         </div>
@@ -311,56 +304,60 @@
     </div>
 </div>
 
-<!-- ── Loading ─────────────────────────────────────────────────────────────── -->
-<div id="loadingState" class="container py-4">
+<!-- Loading -->
+<div id="loadingState" class="container py-2">
     <div class="row justify-content-center">
-        <div class="col-lg-10 text-center py-4">
+        <div class="col-lg-10 text-center py-5">
             <div class="spinner-ring mx-auto mb-3"></div>
-            <p class="text-muted small">Consultando RETYS · SEDUVI · Modelo de viabilidad…</p>
+            <p class="text-muted small mb-0">Consultando RETYS · SEDUVI · Modelo de viabilidad…</p>
+            <p class="text-muted" style="font-size:.75rem;">Esto toma menos de un segundo</p>
         </div>
     </div>
 </div>
 
-<!-- ── Results ─────────────────────────────────────────────────────────────── -->
+<!-- Results -->
 <div id="resultsSection" class="container pb-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
 
             <!-- Score banner -->
-            <div id="scoreBanner" class="score-banner viable mb-3">
+            <div id="scoreBanner" class="score-banner viable">
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <div class="score-number" id="scoreNum">—</div>
-                        <div style="font-size:.75rem;opacity:.7;font-weight:600;">/ 100</div>
+                        <div style="font-size:.72rem;opacity:.65;font-weight:600;">/100 pts</div>
                     </div>
                     <div class="col">
-                        <div class="score-label" id="scoreLabel">—</div>
+                        <div class="score-label" id="scoreLabel"></div>
                         <div class="score-rec" id="scoreRec"></div>
-                        <div class="score-prob" id="scoreProb"></div>
+                        <div class="score-meta" id="scoreMeta"></div>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn-nueva" onclick="resetForm()">↩ Nueva consulta</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Factor grid -->
+            <!-- 6-factor grid -->
             <div class="results-card mb-3">
-                <div class="section-label">Evaluación por Factor (6 dimensiones · máx. 100 pts)</div>
+                <div class="section-label">Factores de viabilidad — 6 dimensiones · máx. 100 pts</div>
                 <div class="factor-grid" id="factorGrid"></div>
             </div>
 
             <!-- Costs + Risks -->
             <div class="row g-3 mb-3">
                 <div class="col-md-5">
-                    <div class="results-card">
-                        <div class="section-label">Desglose de Costos</div>
+                    <div class="results-card h-100">
+                        <div class="section-label">Desglose de costos</div>
                         <div id="costsContainer"></div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="results-card">
-                        <div class="section-label">Evaluación de Riesgos</div>
+                    <div class="results-card h-100">
+                        <div class="section-label">Evaluación de riesgos</div>
                         <div id="risksContainer"></div>
-                        <div id="recBox" class="rec-box rec-viable mt-3">
-                            <div class="fw-bold mb-1" style="font-size:.85rem;">📋 Recomendación SEDECO</div>
+                        <div id="recBox" class="rec-box rec-viable">
+                            <div class="fw-bold mb-1" style="font-size:.83rem;">📋 Recomendación SEDECO</div>
                             <div id="recText" style="font-size:.85rem;"></div>
                         </div>
                     </div>
@@ -369,23 +366,21 @@
 
             <!-- Cash flow chart -->
             <div class="results-card mb-3">
-                <div class="section-label">Proyección Financiera — 12 meses</div>
-                <div class="chart-wrap">
-                    <canvas id="cashChart" height="100"></canvas>
-                </div>
+                <div class="section-label">Proyección financiera — 12 meses</div>
+                <canvas id="cashChart" height="100"></canvas>
             </div>
 
             <!-- Zone + Support -->
             <div class="row g-3 mb-3">
                 <div class="col-md-5">
-                    <div class="results-card">
-                        <div class="section-label">Perfil de Alcaldía</div>
+                    <div class="results-card h-100">
+                        <div class="section-label">Perfil de alcaldía</div>
                         <div id="zoneContainer"></div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="results-card">
-                        <div class="section-label">Programas de Apoyo CDMX (Cenproin)</div>
+                    <div class="results-card h-100">
+                        <div class="section-label">Recursos y programas CDMX (Cenproin)</div>
                         <div id="supportContainer"></div>
                     </div>
                 </div>
@@ -393,54 +388,58 @@
 
             <!-- Procedure roadmap -->
             <div class="results-card mb-3">
-                <div class="section-label">Hoja de Ruta Regulatoria — Trámites en Orden (RETYS)</div>
-                <div class="timeline-strip" id="tlStrip"></div>
+                <div class="section-label">Hoja de ruta regulatoria — trámites en orden (RETYS)</div>
+                <div class="tl-strip" id="tlStrip"></div>
                 <div class="proc-timeline" id="procTimeline"></div>
-                <!-- Agency legend -->
-                <div id="agencyLegend" class="d-flex flex-wrap gap-2 mt-3" style="border-top:1px solid var(--border);padding-top:.75rem;"></div>
+                <div id="agencyLegend" class="d-flex flex-wrap gap-2 mt-1"></div>
+            </div>
+
+            <!-- Bottom CTA -->
+            <div class="text-center">
+                <button class="btn-submit" style="max-width:340px;" onclick="resetForm()">
+                    ↩ Evaluar otro negocio
+                </button>
             </div>
 
         </div>
     </div>
 </div>
 
-<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
-<div class="footer">
+<!-- Footer -->
+<footer class="footer">
     <div class="container d-flex flex-wrap justify-content-between gap-2">
         <span>ViabilidadMX · Hackathon SecretarIA 2026 · SEDECO CDMX</span>
         <span>Datos: RETYS · SEDUVI · Ley de Establecimientos Mercantiles 2024</span>
     </div>
-</div>
+</footer>
 
 <script>
-/* ── Agency config ─────────────────────────────────────────────────────────── */
-const AGENCY_MAP = {
-    'SAT':          { key: 'sat',        label: 'SAT' },
-    'Cámara de Comercio CDMX': { key: 'comercio', label: 'Cámara de Comercio' },
-    'SEDUVI':       { key: 'seduvi',     label: 'SEDUVI' },
-    'Delegación - Ventanilla Única': { key: 'ventanilla', label: 'Ventanilla Única' },
-    'SIAPEM - SEDEMA': { key: 'sedema', label: 'SEDEMA / SIAPEM' },
-    'Secretaría de Salud CDMX': { key: 'salud',  label: 'Secretaría de Salud' },
-    'IMSS':         { key: 'imss',       label: 'IMSS' },
-    'Insurance Company': { key: 'seguro', label: 'Aseguradora' },
+/* ── Agency map ─────────────────────────────────────────────────────────────── */
+const AGENCY = {
+    'SAT':                         { k:'sat',        l:'SAT' },
+    'Cámara de Comercio':          { k:'comercio',   l:'Cámara de Comercio' },
+    'SEDUVI':                      { k:'seduvi',     l:'SEDUVI' },
+    'Delegación':                  { k:'ventanilla', l:'Ventanilla Única' },
+    'SIAPEM':                      { k:'sedema',     l:'SEDEMA / SIAPEM' },
+    'Secretaría de Salud':         { k:'salud',      l:'Sec. de Salud CDMX' },
+    'IMSS':                        { k:'imss',       l:'IMSS' },
+    'Insurance':                   { k:'seguro',     l:'Aseguradora' },
+    'Dirección de Catastro':       { k:'ventanilla', l:'Catastro' },
+    'Ventanilla':                  { k:'ventanilla', l:'Ventanilla Única' },
 };
-function agencyKey(agency) {
-    const entry = Object.entries(AGENCY_MAP).find(([k]) => agency.includes(k.split(' ')[0]));
-    return entry ? entry[1].key : 'seguro';
-}
-function agencyLabel(agency) {
-    const entry = Object.entries(AGENCY_MAP).find(([k]) => agency.includes(k.split(' ')[0]));
-    return entry ? entry[1].label : agency;
+function agInfo(agency) {
+    const hit = Object.entries(AGENCY).find(([k]) => agency.includes(k));
+    return hit ? hit[1] : { k:'seguro', l:agency };
 }
 
-/* ── Factor config ─────────────────────────────────────────────────────────── */
+/* ── Factor meta ────────────────────────────────────────────────────────────── */
 const FACTOR_META = {
-    budget:      { label: 'Capital Disponible',       icon: '💰' },
-    competition: { label: 'Saturación de Mercado',    icon: '🏪' },
-    location:    { label: 'Tráfico Peatonal',         icon: '📍' },
-    security:    { label: 'Seguridad de Zona',        icon: '🛡️' },
-    growth:      { label: 'Crecimiento Económico',    icon: '📈' },
-    legal:       { label: 'Factibilidad Regulatoria', icon: '⚖️' },
+    budget:      { label:'Capital Disponible',        icon:'💰' },
+    competition: { label:'Saturación de Mercado',     icon:'🏪' },
+    location:    { label:'Tráfico Peatonal',          icon:'📍' },
+    security:    { label:'Seguridad de Zona',         icon:'🛡️' },
+    growth:      { label:'Crecimiento Económico',     icon:'📈' },
+    legal:       { label:'Factibilidad Regulatoria',  icon:'⚖️' },
 };
 const STATUS_ES = {
     sufficient:'Suficiente', marginal:'Marginal', insufficient:'Insuficiente',
@@ -448,56 +447,92 @@ const STATUS_ES = {
     growing:'Creciendo', stable:'Estable', declining:'Declive',
     all_attainable:'Alcanzable', some_blockers:'Con bloqueos', major_blockers:'Bloqueado',
 };
+const COST_LABELS = { rent:'Renta', utilities:'Servicios', permits:'Permisos y licencias', insurance:'Seguro', labor_base:'Nómina base', supplies:'Insumos' };
 
 let cashChart = null;
 
-/* ── Form submit ───────────────────────────────────────────────────────────── */
+/* ── Form submit ─────────────────────────────────────────────────────────────── */
 document.getElementById('viabilityForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const bt = document.getElementById('businessType').value;
-    const zone = document.getElementById('zone').value;
-    if (!bt || !zone) { alert('Selecciona el tipo de negocio y la alcaldía.'); return; }
+    hideError();
 
+    const bt     = document.getElementById('businessType').value;
+    const zone   = document.getElementById('zone').value;
     const budget = parseFloat(document.getElementById('budget').value);
     const sqm    = parseFloat(document.getElementById('sqm').value);
     const entity = document.getElementById('entityType').value;
 
+    // Validate
+    let invalid = false;
+    if (!bt)     { markInvalid('businessType'); invalid = true; }
+    if (!zone)   { markInvalid('zone');         invalid = true; }
+    if (!budget || budget < 1000) { markInvalid('budget'); invalid = true; }
+    if (!sqm || sqm < 5 || sqm > 9999) { markInvalid('sqm'); invalid = true; }
+    if (invalid) { showError('Por favor corrige los campos marcados antes de continuar.'); return; }
+
+    clearValidation();
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
     document.getElementById('loadingState').style.display = 'block';
     document.getElementById('resultsSection').style.display = 'none';
-    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('loadingState').scrollIntoView({ behavior:'smooth', block:'center' });
 
     try {
         const res = await fetch('/api/viability-check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ business_type: bt, zone, user_budget_mxn: budget, space_sqm: sqm, entity_type: entity }),
+            body: JSON.stringify({ business_type:bt, zone, user_budget_mxn:budget, space_sqm:sqm, entity_type:entity }),
         });
-        if (!res.ok) { const e = await res.json(); throw new Error(e.detail || 'Error'); }
-        const data = await res.json();
 
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || `Error ${res.status}`);
+        }
+
+        const data = await res.json();
         render(data);
 
         document.getElementById('loadingState').style.display = 'none';
         document.getElementById('resultsSection').style.display = 'block';
-        setTimeout(() => document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+        setTimeout(() => document.getElementById('resultsSection').scrollIntoView({ behavior:'smooth', block:'start' }), 60);
+
     } catch (err) {
         document.getElementById('loadingState').style.display = 'none';
-        alert('Error: ' + err.message);
+        showError('Error al evaluar: ' + err.message);
+        document.getElementById('errorBanner').scrollIntoView({ behavior:'smooth', block:'center' });
+    } finally {
+        btn.disabled = false;
     }
 });
 
-/* ── Helpers ────────────────────────────────────────────────────────────────  */
+/* ── Reset ───────────────────────────────────────────────────────────────────── */
+function resetForm() {
+    document.getElementById('resultsSection').style.display = 'none';
+    clearValidation();
+    hideError();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => document.getElementById('businessType').focus(), 400);
+}
+
+/* ── Validation helpers ──────────────────────────────────────────────────────── */
+function markInvalid(id) { document.getElementById(id).classList.add('is-invalid'); }
+function clearValidation() {
+    ['businessType','zone','budget','sqm'].forEach(id => document.getElementById(id).classList.remove('is-invalid'));
+}
+function showError(msg) {
+    const b = document.getElementById('errorBanner');
+    b.innerHTML = '⚠️ ' + msg;
+    b.style.display = 'block';
+}
+function hideError() { document.getElementById('errorBanner').style.display = 'none'; }
+
+/* ── Helpers ─────────────────────────────────────────────────────────────────── */
 const fmt = n => '$' + Math.round(n).toLocaleString('es-MX');
-const scoreColor = s => s >= 80 ? '#1b5e20' : s >= 65 ? '#631135' : s >= 50 ? '#7f3200' : '#7f0000';
+function barColor(pct) { return pct >= 75 ? '#16a34a' : pct >= 50 ? '#d97706' : '#dc2626'; }
+function badgeClass(pct) { return pct >= 75 ? 'badge-good' : pct >= 50 ? 'badge-ok' : 'badge-bad'; }
 
-function badgeClass(pct) {
-    return pct >= 75 ? 'badge-good' : pct >= 50 ? 'badge-ok' : 'badge-bad';
-}
-function barColor(pct) {
-    return pct >= 75 ? '#16a34a' : pct >= 50 ? '#d97706' : '#dc2626';
-}
-
-/* ── Main render ───────────────────────────────────────────────────────────── */
+/* ── Main render ─────────────────────────────────────────────────────────────── */
 function render(d) {
     renderBanner(d);
     renderFactors(d.factors);
@@ -509,22 +544,23 @@ function render(d) {
     renderProcedures(d.procedures_required, d.total_procedure_days, d.total_procedure_cost);
 }
 
-/* ── Score banner ──────────────────────────────────────────────────────────── */
+/* ── Score banner ────────────────────────────────────────────────────────────── */
 function renderBanner(d) {
     const s = d.viability_score;
-    const banner = document.getElementById('scoreBanner');
-    banner.className = 'score-banner mb-3 ' + (s >= 80 ? 'alta' : s >= 65 ? 'viable' : s >= 50 ? 'marginal' : 'no');
-    document.getElementById('scoreNum').textContent = s;
-    document.getElementById('scoreLabel').textContent = d.viability_label;
-    document.getElementById('scoreRec').textContent = d.recommendation;
-    document.getElementById('scoreProb').textContent = `Tasa histórica de éxito del giro: ${Math.round(d.success_probability * 100)}%`;
+    const cls = s >= 80 ? 'alta' : s >= 65 ? 'viable' : s >= 50 ? 'marginal' : 'no';
+    document.getElementById('scoreBanner').className = 'score-banner ' + cls;
+    document.getElementById('scoreNum').textContent   = s;
+    document.getElementById('scoreLabel').textContent  = d.viability_label;
+    document.getElementById('scoreRec').textContent    = d.recommendation;
+    document.getElementById('scoreMeta').textContent   =
+        `Tasa histórica de éxito del giro: ${Math.round(d.success_probability * 100)}%  ·  ${d.entity_type === 'moral' ? 'Persona Moral' : 'Persona Física'}`;
 }
 
-/* ── Factors ───────────────────────────────────────────────────────────────── */
+/* ── Factor grid ─────────────────────────────────────────────────────────────── */
 function renderFactors(factors) {
     document.getElementById('factorGrid').innerHTML = Object.entries(factors).map(([key, f]) => {
-        const meta = FACTOR_META[key] || { label: key, icon: '·' };
-        const pct  = Math.round((f.score / f.max) * 100);
+        const meta = FACTOR_META[key] || { label:key, icon:'·' };
+        const pct  = Math.round(f.score / f.max * 100);
         const st   = STATUS_ES[f.status] || f.status;
         return `
         <div class="factor-card">
@@ -533,178 +569,155 @@ function renderFactors(factors) {
                 <span class="f-badge ${badgeClass(pct)}">${st}</span>
             </div>
             <div class="factor-bar-bg"><div class="factor-bar-fill" style="width:${pct}%;background:${barColor(pct)};"></div></div>
-            <div class="d-flex justify-content-between mt-1">
+            <div class="factor-footer">
                 <span class="factor-detail">${f.details || ''}</span>
-                <span class="factor-score">${f.score}/${f.max}</span>
+                <span class="factor-detail">${f.score}/${f.max}</span>
             </div>
         </div>`;
     }).join('');
 }
 
-/* ── Costs ─────────────────────────────────────────────────────────────────── */
-function renderCosts(c, revMonthly) {
+/* ── Costs ───────────────────────────────────────────────────────────────────── */
+function renderCosts(c, rev) {
     const bk = c.monthly_fixed_breakdown || {};
-    const costLabels = { rent:'Renta', utilities:'Servicios', permits:'Permisos', insurance:'Seguro', labor_base:'Nómina base', supplies:'Insumos' };
-
-    const breakdown = Object.entries(bk).map(([k, v]) =>
-        `<div class="cost-item"><span class="cost-label cost-sub">${costLabels[k] || k}</span><span class="cost-value cost-sub">${fmt(v)}</span></div>`
-    ).join('');
-
-    const runClass = c.runway_months >= 12 ? 'text-success' : c.runway_months >= 6 ? 'text-warning' : 'text-danger';
+    const breakdown = Object.entries(bk)
+        .map(([k,v]) => `<div class="cost-item"><span class="cost-label cost-sub">${COST_LABELS[k]||k}</span><span class="cost-value cost-sub">${fmt(v)}</span></div>`)
+        .join('');
+    const runClass = c.runway_months >= 12 ? 'text-success' : c.runway_months >= 6 ? '' : 'text-danger';
 
     document.getElementById('costsContainer').innerHTML = `
-        <div class="cost-section-head">Trámites de apertura</div>
-        <div class="cost-item"><span class="cost-label">Costo en trámites</span><span class="cost-value">${fmt(c.procedure_costs)}</span></div>
-        <div class="cost-item"><span class="cost-label">Instalación inicial</span><span class="cost-value">${fmt(c.initial_setup)}</span></div>
+        <div class="cost-sec-head">Apertura (única vez)</div>
+        <div class="cost-item"><span class="cost-label">Trámites regulatorios</span><span class="cost-value">${fmt(c.procedure_costs)}</span></div>
+        <div class="cost-item"><span class="cost-label">Instalación y acondicionamiento</span><span class="cost-value">${fmt(c.initial_setup)}</span></div>
 
-        <div class="cost-section-head">Costo mensual fijo</div>
+        <div class="cost-sec-head">Mensual fijo (${c.space_sqm} m² en ${fmt(c.rental_calculated)}/mes de renta)</div>
         ${breakdown}
-        <div class="cost-item" style="border-top:2px solid var(--border);margin-top:4px;">
+        <div class="cost-item" style="border-top:2px solid var(--border);margin-top:2px;">
             <span class="cost-label fw-bold">Total mensual</span>
             <span class="cost-value">${fmt(c.monthly_fixed)}</span>
         </div>
 
-        <div class="cost-section-head">Proyección primer año</div>
-        <div class="cost-item"><span class="cost-label fw-bold">Total primer año</span><span class="cost-value">${fmt(c.first_year_total)}</span></div>
+        <div class="cost-sec-head">Proyección primer año</div>
+        <div class="cost-item"><span class="cost-label fw-bold">Total año 1</span><span class="cost-value">${fmt(c.first_year_total)}</span></div>
+        <div class="cost-item"><span class="cost-label">Ingreso mensual estimado</span><span class="cost-value" style="color:#16a34a;">${fmt(rev)}</span></div>
         <div class="cost-item"><span class="cost-label">Punto de equilibrio</span><span class="cost-value">${c.break_even_months} meses</span></div>
-        <div class="cost-item"><span class="cost-label">Runway con tu capital</span><span class="cost-value ${runClass}">${c.runway_months} meses</span></div>
-        <div class="cost-item"><span class="cost-label">Ingreso mensual estimado</span><span class="cost-value text-success">${fmt(revMonthly)}</span></div>
-        <div class="cost-item"><span class="cost-label cost-sub">Renta calculada (${c.space_sqm}m²)</span><span class="cost-value cost-sub">${fmt(c.rental_calculated)}/mes</span></div>
-    `;
+        <div class="cost-item"><span class="cost-label">Runway con tu capital</span><span class="cost-value ${runClass}">${c.runway_months} meses</span></div>`;
 }
 
-/* ── Risks ─────────────────────────────────────────────────────────────────── */
+/* ── Risks ───────────────────────────────────────────────────────────────────── */
 function renderRisks(risks, rec, cls) {
     document.getElementById('risksContainer').innerHTML = risks.map(r => `
         <div class="risk-row">
             <div class="risk-dot ${r.level}"></div>
-            <div>
-                <div><span class="risk-cat">${r.icon || ''} ${r.category}</span> <span class="risk-lv ${r.level}">${r.level}</span></div>
+            <div class="risk-body">
+                <div><span class="risk-cat">${r.icon||''} ${r.category}</span><span class="risk-lv ${r.level}">${r.level}</span></div>
                 <div class="risk-detail">${r.detail}</div>
             </div>
-        </div>
-    `).join('');
+        </div>`).join('');
 
     const box = document.getElementById('recBox');
-    box.className = 'rec-box mt-3 rec-' + (cls || 'viable');
+    box.className = 'rec-box rec-' + (cls || 'viable');
     document.getElementById('recText').textContent = rec;
 }
 
-/* ── Cash flow chart ───────────────────────────────────────────────────────── */
+/* ── Cash flow chart ─────────────────────────────────────────────────────────── */
 function renderChart(cf) {
     if (cashChart) cashChart.destroy();
     cashChart = new Chart(document.getElementById('cashChart').getContext('2d'), {
-        type: 'bar',
-        data: {
+        type:'bar',
+        data:{
             labels: cf.map(m => `M${m.month}`),
-            datasets: [
-                { label: 'Ingresos',  data: cf.map(m => m.revenue), backgroundColor: 'rgba(16,76,66,.65)', borderRadius: 4, order: 2 },
-                { label: 'Costos',    data: cf.map(m => m.costs),   backgroundColor: 'rgba(136,24,91,.55)', borderRadius: 4, order: 2 },
-                { label: 'Saldo acumulado', data: cf.map(m => m.cumulative), type: 'line',
-                  borderColor: '#BC955C', backgroundColor: 'rgba(188,149,92,.08)', fill: true,
-                  borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#BC955C',
-                  tension: 0.4, yAxisID: 'y1', order: 1 },
-            ],
+            datasets:[
+                { label:'Ingresos',  data:cf.map(m=>m.revenue), backgroundColor:'rgba(16,76,66,.65)',  borderRadius:4, order:2 },
+                { label:'Costos',    data:cf.map(m=>m.costs),   backgroundColor:'rgba(136,24,91,.55)', borderRadius:4, order:2 },
+                { label:'Saldo acumulado', data:cf.map(m=>m.cumulative), type:'line',
+                  borderColor:'#BC955C', backgroundColor:'rgba(188,149,92,.08)', fill:true,
+                  borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#BC955C',
+                  tension:0.4, yAxisID:'y1', order:1 },
+            ]
         },
-        options: {
-            responsive: true,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                legend: { position: 'top', labels: { font: { size: 11 } } },
-                tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.raw)}` } },
+        options:{
+            responsive:true,
+            interaction:{ mode:'index', intersect:false },
+            plugins:{
+                legend:{ position:'top', labels:{ font:{size:11} } },
+                tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.raw)}` } }
             },
-            scales: {
-                y:  { title: { display: true, text: 'MXN / mes', font:{ size:11} },
-                      ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k', font:{ size:10} } },
-                y1: { position: 'right', grid: { drawOnChartArea: false },
-                      title: { display: true, text: 'Saldo acumulado', font:{size:11} },
-                      ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k', font:{size:10} } },
-            },
-        },
+            scales:{
+                y:  { title:{display:true,text:'MXN/mes',font:{size:11}}, ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{size:10}} },
+                y1: { position:'right', grid:{drawOnChartArea:false}, title:{display:true,text:'Saldo acumulado',font:{size:11}}, ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{size:10}} }
+            }
+        }
     });
 }
 
-/* ── Zone profile ──────────────────────────────────────────────────────────── */
+/* ── Zone profile ────────────────────────────────────────────────────────────── */
 function renderZone(z) {
-    if (!z) { document.getElementById('zoneContainer').innerHTML = '<p class="text-muted small">Sin datos de zona.</p>'; return; }
-    const tags = (z.characteristics || []).map(t => `<span class="zone-tag">${t}</span>`).join('');
+    if (!z) { document.getElementById('zoneContainer').innerHTML = '<p class="text-muted small">Sin datos.</p>'; return; }
+    const crimeColor = z.crime_index >= 70 ? '#dc2626' : z.crime_index >= 40 ? '#d97706' : '#16a34a';
+    const tags = (z.characteristics||[]).map(t => `<span class="zone-tag">${t}</span>`).join('');
     document.getElementById('zoneContainer').innerHTML = `
-        <div class="fw-bold mb-2" style="font-size:.95rem;">${z.name}</div>
-        <div class="zone-metric"><span class="zm-icon">👥</span><span class="zm-label">Población</span><span class="zm-val">${z.population?.toLocaleString('es-MX')}</span></div>
-        <div class="zone-metric"><span class="zm-icon">🚶</span><span class="zm-label">Tráfico peatonal/día</span><span class="zm-val">${z.characteristics?.foot_traffic?.toLocaleString('es-MX') || '—'}</span></div>
-        <div class="zone-metric"><span class="zm-icon">💰</span><span class="zm-label">Renta/m²/año</span><span class="zm-val">$${z.rental_sqm_annual?.toLocaleString('es-MX')}</span></div>
-        <div class="zone-metric"><span class="zm-icon">🏢</span><span class="zm-label">Tipo de zona</span><span class="zm-val" style="font-size:.75rem;">${z.type?.replace(/_/g,' ')}</span></div>
-        ${tags ? `<div class="mt-2">${tags}</div>` : ''}
-    `;
+        <div class="fw-bold mb-2">${z.name} <span style="font-size:.75rem;color:var(--muted);font-weight:400;">(${(z.type||'').replace(/_/g,' ')})</span></div>
+        <div class="zone-metric"><span class="zm-icon">👥</span><span class="zm-label">Población</span><span class="zm-val">${(z.population||0).toLocaleString('es-MX')} hab.</span></div>
+        <div class="zone-metric"><span class="zm-icon">🚶</span><span class="zm-label">Tráfico peatonal/día</span><span class="zm-val">${(z.foot_traffic_daily||0).toLocaleString('es-MX')}</span></div>
+        <div class="zone-metric"><span class="zm-icon">🏪</span><span class="zm-label">Densidad comercial</span><span class="zm-val">${z.business_density_per_10k} neg./10k hab.</span></div>
+        <div class="zone-metric"><span class="zm-icon">🛡️</span><span class="zm-label">Índice de criminalidad</span><span class="zm-val" style="color:${crimeColor}">${z.crime_index}/100</span></div>
+        <div class="zone-metric"><span class="zm-icon">💰</span><span class="zm-label">Renta comercial</span><span class="zm-val">$${(z.rental_sqm_annual||0).toLocaleString('es-MX')}/m²/año</span></div>
+        <div class="zone-metric"><span class="zm-icon">📈</span><span class="zm-label">Crecimiento anual</span><span class="zm-val">${((z.expansion_rate||0)*100).toFixed(1)}%</span></div>
+        ${tags ? `<div class="mt-2">${tags}</div>` : ''}`;
 }
 
-/* ── Support programs ──────────────────────────────────────────────────────── */
+/* ── Support programs ────────────────────────────────────────────────────────── */
 function renderSupport(sr) {
     if (!sr) { document.getElementById('supportContainer').innerHTML = ''; return; }
-    const all = [...(sr.constitution || []), ...(sr.support_programs || [])];
-    document.getElementById('supportContainer').innerHTML = `
-        <div class="mb-2">
-            <div class="cost-section-head">Constitución de empresa</div>
-            ${(sr.constitution || []).map(p => `<div class="support-item"><div class="support-bullet"></div><span class="support-text">${p}</span></div>`).join('')}
-        </div>
-        <div>
-            <div class="cost-section-head">Programas disponibles</div>
-            ${(sr.support_programs || []).map(p => `<div class="support-item"><div class="support-bullet"></div><span class="support-text">${p}</span></div>`).join('')}
-        </div>
-        <div class="mt-3 p-2 rounded" style="background:var(--border);font-size:.75rem;color:var(--muted);">
-            Fuente: Cenproin — Centro de Capacitación y Recursos para PYME CDMX
-        </div>
-    `;
+    const section = (title, items) => items.length ? `
+        <div class="cost-sec-head">${title}</div>
+        ${items.map(p=>`<div class="support-item"><div class="support-bullet"></div><span class="support-text">${p}</span></div>`).join('')}` : '';
+
+    document.getElementById('supportContainer').innerHTML =
+        section('Constitución de empresa', sr.constitution||[]) +
+        section('Programas disponibles', sr.support_programs||[]) +
+        `<div class="support-source">📚 Fuente: Cenproin — Centro de Capacitación y Recursos para PYME CDMX</div>`;
 }
 
-/* ── Procedure timeline ────────────────────────────────────────────────────── */
+/* ── Procedure roadmap ───────────────────────────────────────────────────────── */
 function renderProcedures(procs, totalDays, totalCost) {
-    // Summary strip
     document.getElementById('tlStrip').innerHTML = `
-        <span class="tl-chip">📅 ${totalDays} días hábiles totales</span>
+        <span class="tl-chip">📅 ${totalDays} días hábiles estimados</span>
         <span class="tl-chip">💰 ${fmt(totalCost)} en trámites</span>
-        <span class="tl-chip">📋 ${procs.length} trámites en secuencia</span>
-        <span class="tl-chip">⚡ Ruta crítica: RFC → Uso de Suelo → Licencia Municipal</span>
-    `;
+        <span class="tl-chip">📋 ${procs.length} pasos en secuencia</span>
+        <span class="tl-chip">⚡ Ruta crítica: RFC → Uso de Suelo → Licencia</span>`;
 
-    // Track agencies used for legend
-    const agenciesUsed = new Set();
-
+    const agenciesUsed = new Map();
     document.getElementById('procTimeline').innerHTML = procs.map(p => {
-        const ak = agencyKey(p.agency);
-        const al = agencyLabel(p.agency);
-        agenciesUsed.add(ak + '|' + al);
+        const ag = agInfo(p.agency);
+        agenciesUsed.set(ag.k, ag.l);
         const docs = p.documents.length
-            ? `<div class="proc-docs">📄 <strong>Docs:</strong> ${p.documents.join(' · ')}</div>`
-            : '';
+            ? `<div class="proc-docs">📄 <strong>Documentos:</strong> ${p.documents.join(' · ')}</div>` : '';
         const dep = p.blocking.length
-            ? `<div class="proc-dep">⛓ Requiere: ${p.blocking.map(b => b.replace(/_/g,' ')).join(', ')}</div>`
-            : '';
-        const cost = p.cost_mxn > 0 ? fmt(p.cost_mxn) : 'Gratuito';
+            ? `<div class="proc-dep">⛓ Requiere completar: ${p.blocking.map(b=>b.replace(/_/g,' ')).join(', ')}</div>` : '';
+        const costLabel = p.cost_mxn > 0 ? `💰 ${fmt(p.cost_mxn)}` : '✅ Gratuito';
         return `
         <div class="proc-step">
-            <div class="proc-dot bg-${ak}">${p.sequence}</div>
-            <div class="proc-card border-${ak}" style="background:var(--bg);">
-                <div class="proc-name ag-${ak}">${p.name}</div>
+            <div class="proc-dot dot-${ag.k}">${p.sequence}</div>
+            <div class="proc-card card-${ag.k}">
+                <div class="proc-name txt-${ag.k}">${p.name}</div>
                 <div class="proc-desc">${p.description}</div>
                 <div>
-                    <span class="proc-pill pill-${ak}">🏛️ ${al}</span>
+                    <span class="proc-pill pill-${ag.k}">🏛️ ${ag.l}</span>
                     <span class="proc-pill" style="background:#f3f4f6;color:var(--text);">⏱️ ${p.timeline_days} días</span>
-                    <span class="proc-pill" style="background:#f3f4f6;color:var(--text);">${p.cost_mxn > 0 ? '💰 '+cost : '✅ '+cost}</span>
+                    <span class="proc-pill" style="background:#f3f4f6;color:var(--text);">${costLabel}</span>
                 </div>
                 ${docs}${dep}
             </div>
         </div>`;
     }).join('');
 
-    // Agency legend
-    const legendItems = [...agenciesUsed].map(entry => {
-        const [ak, al] = entry.split('|');
-        return `<span class="proc-pill pill-${ak}">● ${al}</span>`;
-    });
     document.getElementById('agencyLegend').innerHTML =
-        `<span style="font-size:.72rem;font-weight:700;color:var(--muted);align-self:center;">Dependencias:</span>` +
-        legendItems.join('');
+        `<span style="font-size:.7rem;font-weight:700;color:var(--muted);align-self:center;">Dependencias:</span>` +
+        [...agenciesUsed.entries()].map(([k,l]) =>
+            `<span class="proc-pill pill-${k}" style="font-size:.72rem;">● ${l}</span>`
+        ).join('');
 }
 </script>
 </body>
