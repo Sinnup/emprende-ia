@@ -300,12 +300,28 @@ with col2:
 st.divider()
 go = st.button("🔍 Evaluar Viabilidad del Negocio", use_container_width=True, type="primary")
 
-# ── Results ───────────────────────────────────────────────────────────────────
-if not go:
+# ── On button click: compute R immediately and cache (Claude called later) ─────
+if go:
+    with st.spinner("Calculando con datos del RETYS y SEDUVI…"):
+        R = calculate(btype, zone_key, budget, sqm)
+    st.session_state["R"]            = R
+    st.session_state["claude_text"]  = None   # filled below, after results shown
+    st.session_state["claude_error"] = None
+    st.session_state["needs_claude"] = True
+    st.session_state["entity"]       = entity
+    st.session_state["btype"]        = btype
+    st.session_state["zone_key"]     = zone_key
+    st.session_state["budget"]       = budget
+
+# ── Guard: nothing computed yet ───────────────────────────────────────────────
+if "R" not in st.session_state:
     st.stop()
 
-with st.spinner("Calculando con datos del RETYS y SEDUVI…"):
-    R = calculate(btype, zone_key, budget, sqm)
+R        = st.session_state["R"]
+entity   = st.session_state["entity"]
+btype    = st.session_state["btype"]
+zone_key = st.session_state["zone_key"]
+budget   = st.session_state["budget"]
 
 # ── Score banner ──────────────────────────────────────────────────────────────
 st.markdown(f"""<div class="score-box score-{R['cls']}">
@@ -414,14 +430,18 @@ with pc_col:
     </div>""", unsafe_allow_html=True)
 
 # ── Claude AI recommendation ──────────────────────────────────────────────────
+# Results are already rendered above. Now call Claude (shown as spinner at
+# bottom). On reruns (map pan, scroll) session_state has the cached response
+# so the API is NOT called again.
 st.divider()
 st.markdown("### 🤖 Recomendación personalizada — Claude AI")
 
-factors_txt = "\n".join(
-    f"- {FACTOR_NAMES[k]}: {f['score']}/{f['max']} ({f['status']}) — {f['detail']}"
-    for k, f in R["factors"].items()
-)
-prompt = f"""Eres un asesor especialista de SEDECO Ciudad de México.
+if st.session_state.get("needs_claude"):
+    f_txt = "\n".join(
+        f"- {FACTOR_NAMES[k]}: {f['score']}/{f['max']} ({f['status']}) — {f['detail']}"
+        for k, f in R["factors"].items()
+    )
+    _prompt = f"""Eres un asesor especialista de SEDECO Ciudad de México.
 
 Un emprendedor evalúa abrir:
 - Giro: {BTYPE_OPTS[btype]}
@@ -433,7 +453,7 @@ Un emprendedor evalúa abrir:
 Resultado del modelo: {R['score']}/100 — {R['label']}
 
 Factores:
-{factors_txt}
+{f_txt}
 
 Costo total primer año: ${R['costs']['first_year']:,} MXN
 Punto de equilibrio: {R['costs']['break_even']} meses
@@ -447,20 +467,25 @@ Responde en español mexicano (máx. 180 palabras):
 
 Sé directo, usa contexto real de la Ciudad de México."""
 
-with st.spinner("Claude está analizando tu caso…"):
-    try:
-        resp = claude.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=400,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        html_response = md_lib.markdown(
-            resp.content[0].text,
-            extensions=["nl2br"]
-        )
-        st.markdown(f'<div class="ai-box">{html_response}</div>', unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error al conectar con Claude API: {e}")
+    with st.spinner("Claude está analizando tu caso…"):
+        try:
+            _resp = claude.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=400,
+                messages=[{"role": "user", "content": _prompt}],
+            )
+            st.session_state["claude_text"]  = _resp.content[0].text
+            st.session_state["claude_error"] = None
+        except Exception as e:
+            st.session_state["claude_text"]  = None
+            st.session_state["claude_error"] = str(e)
+    st.session_state["needs_claude"] = False
+
+if st.session_state.get("claude_text"):
+    html_response = md_lib.markdown(st.session_state["claude_text"], extensions=["nl2br"])
+    st.markdown(f'<div class="ai-box">{html_response}</div>', unsafe_allow_html=True)
+elif st.session_state.get("claude_error"):
+    st.error(f"Error al conectar con Claude API: {st.session_state['claude_error']}")
 
 # ── Competitor heatmap ───────────────────────────────────────────────────────
 st.divider()
