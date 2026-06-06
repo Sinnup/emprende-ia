@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "source": "Ley de Establecimientos Mercantiles + Reglamento",
+    "date_extracted": "2026-06-06",
+    "scope": "Official costs from regulatory documents"
+  },
+  "costs": {
+    "costo_licencia_municipal": {
+      "base_cost": 800,
+      "annual_renewal": 400,
+      "emergency_processing": 1200,
+      "expedited_processing": 1000,
+      "notes": "Costs vary by entity and activity type"
+    },
+    "costo_certificado_uso_suelo": {
+      "standard": 600,
+      "expedited": 800,
+      "corrective_actions": 300,
+      "notes": "If incompatible use, may require architectural changes"
+    },
+    "environmental_permits": {
+      "siapem_standard": 2000,
+      "siapem_expedited": 3000,
+      "impact_study": 5000,
+      "notes": "Required for food, manufacturing, waste handling"
+    }
+  }
+}

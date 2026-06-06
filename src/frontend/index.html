@@ -657,7 +657,7 @@ function renderZone(z) {
     const crimeColor = z.crime_index >= 70 ? '#dc2626' : z.crime_index >= 40 ? '#d97706' : '#16a34a';
     const tags = (z.characteristics||[]).map(t => `<span class="zone-tag">${t}</span>`).join('');
     document.getElementById('zoneContainer').innerHTML = `
-        <div class="fw-bold mb-2">${z.name} <span style="font-size:.75rem;color:var(--muted);font-weight:400;">(${(z.type||'').replace(/_/g,' ')})</span></div>
+        <div class="fw-bold mb-2">${z.name} <span style="font-size:.75rem;color:var(--muted);font-weight:400;">${z.type ? '· ' + z.type : ''}</span></div>
         <div class="zone-metric"><span class="zm-icon">👥</span><span class="zm-label">Población</span><span class="zm-val">${(z.population||0).toLocaleString('es-MX')} hab.</span></div>
         <div class="zone-metric"><span class="zm-icon">🚶</span><span class="zm-label">Tráfico peatonal/día</span><span class="zm-val">${(z.foot_traffic_daily||0).toLocaleString('es-MX')}</span></div>
         <div class="zone-metric"><span class="zm-icon">🏪</span><span class="zm-label">Densidad comercial</span><span class="zm-val">${z.business_density_per_10k} neg./10k hab.</span></div>
