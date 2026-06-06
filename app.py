@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import streamlit as st
 from anthropic import Anthropic
+import markdown as md_lib
 
 # Load API key from secrets.properties if not already in environment
 def _load_secrets():
@@ -112,7 +113,12 @@ div[data-testid="stDecoration"] { display: none; }
 /* AI box */
 .ai-box { background: #fdf0f6; border-left: 4px solid #88185B;
           border-radius: 12px; padding: 1.1rem 1.4rem; color: #1f2937;
-          font-size: .9rem; line-height: 1.6; }
+          font-size: .9rem; line-height: 1.7; }
+.ai-box h1, .ai-box h2, .ai-box h3 { color: #88185B; margin: .7rem 0 .3rem; font-size: 1rem; }
+.ai-box strong { color: #631135; }
+.ai-box ul, .ai-box ol { padding-left: 1.2rem; margin: .4rem 0; }
+.ai-box li { margin-bottom: .25rem; }
+.ai-box p  { margin: .4rem 0; }
 </style>""", unsafe_allow_html=True)
 
 # ── Data ──────────────────────────────────────────────────────────────────────
@@ -439,10 +445,11 @@ with st.spinner("Claude está analizando tu caso…"):
             max_tokens=400,
             messages=[{"role": "user", "content": prompt}],
         )
-        st.markdown(
-            f'<div class="ai-box">{resp.content[0].text.replace(chr(10), "<br>")}</div>',
-            unsafe_allow_html=True
+        html_response = md_lib.markdown(
+            resp.content[0].text,
+            extensions=["nl2br"]
         )
+        st.markdown(f'<div class="ai-box">{html_response}</div>', unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error al conectar con Claude API: {e}")
 
